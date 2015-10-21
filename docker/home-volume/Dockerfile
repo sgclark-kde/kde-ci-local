@@ -15,7 +15,8 @@ RUN useradd -m -g 1000 -u 1000 -d /home/jenkins jenkins
 USER jenkins
 RUN mkdir /home/jenkins/.ssh
 
-#These keys need to be in path (generated on your host and placed in /var/lib/jenkins on master)
+#These keys need to be in path (generated on your host and placed in /var/lib/jenkins/scripts/docker/home-volume on master)
+# Be sure to add these files to gitignore
 ADD id_rsa /home/jenkins/.ssh/
 ADD id_rsa.pub /home/jenkins/.ssh/
 ADD known_hosts /home/jenkins/.ssh/
