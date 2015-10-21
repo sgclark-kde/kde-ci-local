@@ -73,6 +73,7 @@ class Platform {
 				} else {
 					this.shell = 'Shell'
 				}
+				def compiler = platformCompilers.getAt(platform)
 				project / builders <<
 				'org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder' {
 					condition(class: 'org.jenkins_ci.plugins.run_condition.core.StringsMatchCondition') {
@@ -83,7 +84,8 @@ class Platform {
 					runner(class: "org.jenkins_ci.plugins.run_condition.BuildStepRunner\$Fail")
 					buildStep(class: 'hudson.tasks.' + "${this.shell}") {
 						command "python ${home}/scripts/tools/update-setup.py \n" + \
-								"python ${home}/scripts/tools/prepare-environment.py"
+								"python ${home}/scripts/tools/prepare-environment.py" + \
+								' --platform ' + platform + ' --compiler ' + compiler
 					}
 				}
 			}

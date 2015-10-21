@@ -11,8 +11,8 @@ parser.add_argument('--project', type=str)
 parser.add_argument('--branchGroup', type=str, default='kf5-qt5')
 parser.add_argument('--sources', type=str)
 parser.add_argument('--delay', type=int, default=10)
-parser.add_argument('--platform', type=str, choices=['linux64-g++', 'darwin-mavericks', 'windows64-vs2013'], default='linux64-g++')
-parser.add_argument('--compiler', type=str, choices=['gcc', 'clang', 'mingw', 'vs2013'], default='gcc')
+parser.add_argument('--platform', type=str, required=True, choices=['ubuntu', 'osx', 'windows'], default='ubuntu')
+parser.add_argument('--compiler', type=str, required=True, choices=['gcc', 'clang', 'mingw', 'vs2013'], default='gcc')
 
 # Parse the arguments
 environmentArgs = check_jenkins_environment()
