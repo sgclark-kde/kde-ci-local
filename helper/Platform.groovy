@@ -76,7 +76,8 @@ class Platform {
 				} else {
 					this.shell = 'Shell'
 				}
-				def compiler = PlatformToCompiler.getAt(platform)
+				def compiler = this.PlatformToCompiler.getAt(platform)
+				
 				project / builders <<
 				'org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder' {
 					condition(class: 'org.jenkins_ci.plugins.run_condition.core.StringsMatchCondition') {

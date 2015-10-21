@@ -75,7 +75,7 @@ groupData.each { groups ->
 			}		
 			println "The following platforms are scheduled to build for " + jobname + " " \
 				+ track.value + ": " + new_platform.platformsToBuild		
-			
+				println new_platform.PlatformToCompiler
 			//Set CI variables
 			CIVars = new CIOptions(jobname, currentProject.description, currentProject.combinations, currentProject.downstream, currentProject.logrotator, \
 				currentProject.priority, currentProject.email, currentProject.irc, currentProject.html5, currentProject.cron)
