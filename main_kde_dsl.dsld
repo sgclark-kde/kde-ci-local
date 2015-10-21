@@ -158,7 +158,7 @@ groupData.each { groups ->
 					// We only need to create this matrix if the job has variations
 					configure variationClosure
 					// Generate buildsteps.
-					configure new_platform.initialPlatformBlock("$HOME", new_platform.PlatformToCompiler)
+					configure new_platform.initialPlatformBlock(new_platform.PlatformToCompiler)
 					
 		
 				// Create publishers based on if the file exists.

@@ -67,13 +67,19 @@ class Platform {
 			    { 'PLATFORM:' platform, 'compiler:' compiler }				
 		]
 	}
-	def initialPlatformBlock(String home, PlatformToCompiler) {
+	def initialPlatformBlock(PlatformToCompiler) {
+		def home
 		return { project ->
 			project.name = 'matrix-project'
 			this.platformsToBuild.each { platform ->				
 				if (platform == "windows") {
 					this.shell = 'BatchFile'
+					home = "D:\kderoot"
+				} else if (platform == "osx") {					
+					home = "/Users/jenkins/"
+					this.shell = 'Shell'
 				} else {
+					home = "/home/jenkins/"
 					this.shell = 'Shell'
 				}
 				def compiler = PlatformToCompiler.find { key, value -> key == platform }
