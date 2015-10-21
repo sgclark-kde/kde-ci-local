@@ -56,7 +56,8 @@
 		"docker-plugin",
 		"matrix-groovy-execution-strategy",
 		"simple-theme-plugin",
-		"dockerhub-notification"  
+		"dockerhub-notification",
+		"docker-build-publish"  
 	]
 }
 ]
