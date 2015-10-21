@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import org.jenkinsci.*
 
 class Platform {
+	static Map PlatformToCompiler = [:]
 	static List platformCompilers = []
 	static List platformsToBuild = []
 	String platform	
@@ -53,11 +54,13 @@ class Platform {
 		if(this.build != false && this.tracks.contains(track)) {			
 			this.platformsToBuild << key
 			this.platformCompilers << compiler
-		}			
+		}
+		PlatformToCompiler <<  [ key : compiler] 
 	}
 	def newTrack()	{		
 		platformCompilers = []		
 		platformsToBuild = []	
+		PlatformToCompiler = [:]
 	} 
 	def newCombinations(String platform, String compiler) {
 		this.combinations = [
@@ -73,7 +76,7 @@ class Platform {
 				} else {
 					this.shell = 'Shell'
 				}
-				def compiler = platformCompilers.getAt(platform)
+				def compiler = PlatformToCompiler.getAt(platform)
 				project / builders <<
 				'org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder' {
 					condition(class: 'org.jenkins_ci.plugins.run_condition.core.StringsMatchCondition') {
