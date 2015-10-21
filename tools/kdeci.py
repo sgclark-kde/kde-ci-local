@@ -79,7 +79,7 @@ def load_all_projects( projectFile, configDirectory):
 def check_jenkins_environment():
     # Prepare
     arguments = argparse.Namespace()
-
+    print os.environ
     # Do we have a job name?
     if 'JOB_NAME' in os.environ:
         # Split it out
@@ -102,9 +102,8 @@ def check_jenkins_environment():
         arguments.variation = os.environ['Variation']
 
         # Do we need to change into the proper working directory?
-    if 'JENKINS_SLAVE_HOME' in os.environ:
-         # Change working directory
-         os.chdir( os.environ['JENKINS_SLAVE_HOME'] )
+    if 'JENKINS_SLAVE_HOME' in os.environ: os.chdir( os.environ['JENKINS_SLAVE_HOME'] ) 
+    else: os.chdir( expanduser("~") + "/scripts/" ) 
 
     return arguments
 
