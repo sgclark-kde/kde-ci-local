@@ -74,7 +74,7 @@ class Platform {
 			this.platformsToBuild.each { platform ->				
 				if (platform == "windows") {
 					this.shell = 'BatchFile'
-					home = "D:\kderoot"
+					home = "D:\\kderoot"
 				} else if (platform == "osx") {					
 					home = "/Users/jenkins/"
 					this.shell = 'Shell'
