@@ -5,7 +5,7 @@ FROM busybox
 MAINTAINER Scarlett Clark <sgclark@kubuntu.org>
 
 RUN adduser -g 1000 -u 1000 jenkins --disabled-password
-RUN mkdir /srv/jenkins
+RUN mkdir -p /srv/jenkins
 RUN chown -R jenkins.jenkins /srv/jenkins 
 
 VOLUME /srv/jenkins
