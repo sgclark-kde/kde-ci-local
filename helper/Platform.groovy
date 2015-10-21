@@ -55,7 +55,7 @@ class Platform {
 			this.platformsToBuild << key
 			this.platformCompilers << compiler			
 		}
-		this.PlatformToCompiler <<  [ "${key}" : compiler]
+		this.PlatformToCompiler <<  [ "${key}" : compiler ]
 	}
 	def newTrack()	{		
 		platformCompilers = []		
@@ -76,7 +76,7 @@ class Platform {
 				} else {
 					this.shell = 'Shell'
 				}
-				def compiler = this.PlatformToCompiler.find(platform)
+				def compiler = this.PlatformToCompiler.getAt(platform).value()
 				
 				project / builders <<
 				'org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder' {
