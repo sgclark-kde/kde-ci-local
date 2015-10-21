@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import org.jenkinsci.*
 
 class Platform {
-	static List PlatformToCompiler = [:]
+	static Map PlatformToCompiler = [:]
 	static List platformCompilers = []
 	static List platformsToBuild = []
 	String platform	
