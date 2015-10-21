@@ -28,3 +28,4 @@ RUN mkdir /srv/jenkins && chown jenkins:jenkins /srv/jenkins
 EXPOSE 22
 
 VOLUME /home/jenkins:/home/jenkins HOME
+VOLUME /srv/jenkins:/srv/jenkins INSTALL
