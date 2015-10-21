@@ -67,7 +67,7 @@ class Platform {
 			    { 'PLATFORM:' platform, 'compiler:' compiler }				
 		]
 	}
-	def initialPlatformBlock(String home) {
+	def initialPlatformBlock(String home, PlatformToCompiler) {
 		return { project ->
 			project.name = 'matrix-project'
 			this.platformsToBuild.each { platform ->				
@@ -76,7 +76,7 @@ class Platform {
 				} else {
 					this.shell = 'Shell'
 				}
-				def compiler = this.PlatformToCompiler.getAt(platform).value()
+				def compiler = PlatformToCompiler.get(platform)
 				
 				project / builders <<
 				'org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder' {

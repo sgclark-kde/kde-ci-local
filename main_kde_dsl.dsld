@@ -159,7 +159,7 @@ groupData.each { groups ->
 					configure variationClosure
 					// Generate buildsteps.
 					
-					configure new_platform.initialPlatformBlock("${JENKINS_SLAVE_HOME}")
+					configure new_platform.initialPlatformBlock("${JENKINS_SLAVE_HOME}", new_platform.PlatformToCompiler)
 					
 		
 				// Create publishers based on if the file exists.
