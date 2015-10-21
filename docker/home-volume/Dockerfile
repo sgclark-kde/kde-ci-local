@@ -16,10 +16,10 @@ USER jenkins
 RUN mkdir /home/jenkins/.ssh
 
 #These keys need to be in path (generated on your host and placed in /var/lib/jenkins on master)
-ADD /var/lib/jenkins/slave-data-files/id_rsa /home/jenkins/.ssh/
-ADD /var/lib/jenkins/slave-data-files/id_rsa.pub /home/jenkins/.ssh/
-ADD /var/lib/jenkins/slave-data-files/known_hosts /home/jenkins/.ssh/
-ADD /var/lib/jenkins/slave-data-files/authorized_keys /home/jenkins/.ssh/
+ADD id_rsa /home/jenkins/.ssh/
+ADD id_rsa.pub /home/jenkins/.ssh/
+ADD known_hosts /home/jenkins/.ssh/
+ADD authorized_keys /home/jenkins/.ssh/
 
 USER root
 RUN chown -R jenkins.jenkins /home/jenkins 
