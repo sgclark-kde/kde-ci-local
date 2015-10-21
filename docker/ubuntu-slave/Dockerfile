@@ -4,7 +4,7 @@ MAINTAINER Scarlett Clark <sgclark@kde.org>
 #Install Essentials up to qt5
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get -y build-dep qtbase5-dev
-RUN apt-get -y install openssh-server \
+RUN apt-get -y install ssh \
 	sudo \
 	wget \
 	build-essential \
