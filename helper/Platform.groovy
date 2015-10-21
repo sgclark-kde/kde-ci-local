@@ -76,7 +76,7 @@ class Platform {
 				} else {
 					this.shell = 'Shell'
 				}
-				def compiler = PlatformToCompiler.getAt(platform)
+				def compiler = PlatformToCompiler.find { key, value -> key == platform }
 				
 				project / builders <<
 				'org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder' {
