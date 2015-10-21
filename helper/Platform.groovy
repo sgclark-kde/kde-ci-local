@@ -60,7 +60,7 @@ class Platform {
 	def newTrack()	{		
 		platformCompilers = []		
 		platformsToBuild = []	
-		PlatformToCompiler = [:]
+		PlatformToCompiler[].withDefault{ [:] }
 	} 
 	def newCombinations(String platform, String compiler) {
 		this.combinations = [
