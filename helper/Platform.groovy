@@ -55,7 +55,7 @@ class Platform {
 			this.platformsToBuild << key
 			this.platformCompilers << compiler				
 		}
-		this.PlatformToCompiler << ["${key}" : compiler]
+		this.PlatformToCompiler << ["${key}" : ' ' + compiler]
 	}
 	def newTrack()	{		
 		platformCompilers = []		
