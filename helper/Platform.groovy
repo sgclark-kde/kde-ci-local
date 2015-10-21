@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import org.jenkinsci.*
 
 class Platform {
-	static Map PlatformToCompiler = [:]
+	static List PlatformToCompiler = [:]
 	static List platformCompilers = []
 	static List platformsToBuild = []
 	String platform	
@@ -53,10 +53,9 @@ class Platform {
 	def addPlatform(String key, String compiler, String track) {			
 		if(this.build != false && this.tracks.contains(track)) {			
 			this.platformsToBuild << key
-			this.platformCompilers << compiler	
-			this.PlatformToCompiler << ['platform': "${key}" , 'compiler': compiler ]
+			this.platformCompilers << compiler				
 		}
-		
+		this.PlatformToCompiler << ["${key}" : compiler]
 	}
 	def newTrack()	{		
 		platformCompilers = []		
@@ -77,7 +76,7 @@ class Platform {
 				} else {
 					this.shell = 'Shell'
 				}
-				def compiler = this.PlatformToCompiler.getAt(platform).compiler
+				def compiler = this.PlatformToCompiler.getAt(platform).value()
 				
 				project / builders <<
 				'org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder' {
