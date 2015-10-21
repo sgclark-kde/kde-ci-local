@@ -146,11 +146,11 @@ groupData.each { groups ->
 					}
 					//Create matrix for each platform
 					configure platformClosure
-					touchStoneFilter( 'PLATFORM=="linux"' )
+					touchStoneFilter( 'PLATFORM=="ubuntu"' )
 					configure { project ->
 						project.name = 'matrix-project'
 						project / combinationFilter <<
-						'(PLATFORM=="linux" && compiler=="gcc")' || '(PLATFORM=="windows" && compiler=="vs2013")' || '(PLATFORM=="osx" && compiler=="clang")' || '(PLATFORM=="android" && compiler=="android_sdk")' || '(PLATFORM=="ubuntup" && compiler=="ubuntu_sdk")'
+						'(PLATFORM=="ubuntu" && compiler=="gcc")' || '(PLATFORM=="windows" && compiler=="vs2013")' || '(PLATFORM=="osx" && compiler=="clang")' || '(PLATFORM=="android" && compiler=="android_sdk")' || '(PLATFORM=="ubuntup" && compiler=="ubuntu_sdk")'
 					}
 					configure compilerClosure
 					// We only need to create this matrix if the job has variations
