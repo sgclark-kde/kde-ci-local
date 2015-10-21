@@ -17,7 +17,6 @@ RUN apt-get -y install ssh \
 	gnupg-agent 
 
 RUN mkdir -p /var/run/sshd
-#RUN sed 's/Port\ 22/Port\ 222/' -i /etc/ssh/sshd_config
 RUN /usr/sbin/sshd
 RUN useradd -m -d /home/jenkins jenkins
 RUN echo 'jenkins:1234' | chpasswd #changeme
