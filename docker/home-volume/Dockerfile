@@ -2,7 +2,7 @@
 # This container holds the install sync data in /home/jenkins
 # If loading a backup the files need to be in the build dir
 FROM ubuntu:trusty
-MAINTAINER Scarlett Clark <sgclark@kubuntu.org>
+MAINTAINER Scarlett Clark <sgclark@kde.org>
 
 # These dependencies are needed to grab our tools
 RUN apt-get update && apt-get install -y python \
@@ -16,10 +16,10 @@ USER jenkins
 RUN mkdir /home/jenkins/.ssh
 
 #These keys need to be in path (generated on your host and placed in /var/lib/jenkins on master)
-ADD slave-data-files/id_rsa /home/jenkins/.ssh/
-ADD slave-data-files/id_rsa.pub /home/jenkins/.ssh/
-ADD slave-data-files/known_hosts /home/jenkins/.ssh/
-ADD slave-data-files/authorized_keys /home/jenkins/.ssh/
+ADD /var/lib/jenkins/slave-data-files/id_rsa /home/jenkins/.ssh/
+ADD /var/lib/jenkins/slave-data-files/id_rsa.pub /home/jenkins/.ssh/
+ADD /var/lib/jenkins/slave-data-files/known_hosts /home/jenkins/.ssh/
+ADD /var/lib/jenkins/slave-data-files/authorized_keys /home/jenkins/.ssh/
 
 USER root
 RUN chown -R jenkins.jenkins /home/jenkins 
