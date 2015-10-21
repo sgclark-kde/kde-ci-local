@@ -21,7 +21,7 @@ arguments = parser.parse_args( namespace=environmentArgs )
 
 # Load the various configuration files, and the projects
 config = load_project_configuration( arguments.project, arguments.branchGroup, arguments.platform, arguments.compiler )
-if not load_projects( 'metadata/kde_projects.json', 'config/projects'):
+if not load_all_projects( 'metadata/kde_projects.json', 'config/projects'):
 	sys.exit("Failure to load projects - unable to continue")
 
 # # Load the requested project
