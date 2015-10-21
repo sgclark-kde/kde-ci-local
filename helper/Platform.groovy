@@ -53,9 +53,9 @@ class Platform {
 	def addPlatform(String key, String compiler, String track) {			
 		if(this.build != false && this.tracks.contains(track)) {			
 			this.platformsToBuild << key
-			this.platformCompilers << compiler
+			this.platformCompilers << compiler			
 		}
-		this.PlatformToCompiler <<  [ "${key}" : compiler] 
+		this.PlatformToCompiler <<  [ "${key}" : compiler]
 	}
 	def newTrack()	{		
 		platformCompilers = []		
@@ -77,7 +77,7 @@ class Platform {
 					this.shell = 'Shell'
 				}
 				def compiler = this.PlatformToCompiler.getAt(platform)
-				
+				println compiler
 				project / builders <<
 				'org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder' {
 					condition(class: 'org.jenkins_ci.plugins.run_condition.core.StringsMatchCondition') {
