@@ -14,7 +14,7 @@ import helper.CIOptions
 import helper.Platform
 import helper.GenerateMatrixDSL
 
-def allJsonMap = parse_kde_projects_json()
+def allJsonMap = parse_kde_projects_json("${JENKIS_HOME"})
 assert allJsonMap instanceof Map
 def groupData = extract_data(allJsonMap, "groups")
 assert groupData instanceof Map

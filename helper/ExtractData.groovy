@@ -10,8 +10,7 @@ import static groovy.json.JsonOutput.*
 
 //Class to do the data extraction from the json file.
 class ExtractData {
-	static Map parse_kde_projects_json() {
-		def JENKINS_HOME = "/home/scarlett/kde-ci-tools/metadata/"	
+	static Map parse_kde_projects_json(JENKINS_HOME) {			
 		Object all_json_data_parsed = new JsonSlurper().parseText( new File("${JENKINS_HOME}" + "kde_projects.json").getText())			
 		Map all_json_data_map = [:] << all_json_data_parsed
 		assert all_json_data_map instanceof Map
