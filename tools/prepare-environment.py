@@ -3,7 +3,7 @@
 import sys
 import time
 import argparse
-import kdeci
+from kdeci import *
 
 # Load our command line arguments
 parser = argparse.ArgumentParser(description='Utility to initialize a git repository before hand over to the build executor.')
