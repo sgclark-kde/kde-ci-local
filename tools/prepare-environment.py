@@ -15,12 +15,12 @@ parser.add_argument('--platform', type=str, choices=['linux64-g++', 'darwin-mave
 parser.add_argument('--compiler', type=str, choices=['gcc', 'clang', 'mingw', 'vs2013'], default='gcc')
 
 # Parse the arguments
-environmentArgs = kdeci.check_jenkins_environment()
+environmentArgs = check_jenkins_environment()
 print environmentArgs
 arguments = parser.parse_args( namespace=environmentArgs )
 
 # Load the various configuration files, and the projects
-config = kdeci.load_project_configuration( arguments.project, arguments.branchGroup, arguments.platform, arguments.compiler )
+config = load_project_configuration( arguments.project, arguments.branchGroup, arguments.platform, arguments.compiler )
 if not load_projects( 'metadata/kde_projects.json', 'config/projects'):
 	sys.exit("Failure to load projects - unable to continue")
 

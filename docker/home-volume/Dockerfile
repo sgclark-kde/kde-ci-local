@@ -22,7 +22,7 @@ ADD id_rsa.pub /home/jenkins/.ssh/
 ADD known_hosts /home/jenkins/.ssh/
 ADD authorized_keys /home/jenkins/.ssh/
 
-RUN git clone https://github.com/sgclark-kde/kde-ci-local.git scripts
+RUN git clone https://github.com/sgclark-kde/kde-ci-local.git /home/jenkins/scripts
 
 USER root
 RUN chown -R jenkins.jenkins /home/jenkins 
