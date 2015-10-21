@@ -53,9 +53,10 @@ class Platform {
 	def addPlatform(String key, String compiler, String track) {			
 		if(this.build != false && this.tracks.contains(track)) {			
 			this.platformsToBuild << key
-			this.platformCompilers << compiler			
+			this.platformCompilers << compiler	
+			this.PlatformToCompiler << ['platform': "${key}" , 'compiler': compiler ]
 		}
-		this.PlatformToCompiler <<  ['platform': "${key}" , 'compiler': compiler ]
+		
 	}
 	def newTrack()	{		
 		platformCompilers = []		
