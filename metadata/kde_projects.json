@@ -38,7 +38,7 @@
 					},
 					"description":"Mirror of upstream mlt",					
 					"platforms": {
-    					"linux": {
+    					"ubuntu": {
     						"build":"true",
     						"compilers":"gcc", 
     						"platform_email": "",
@@ -106,7 +106,7 @@
           		"libaccounts-qt": {
 					"description":"Mirror of upstream libaccounts-qt",					
 					"platforms": {
-    					"linux": {
+    					"ubuntu": {
     						"build":"true",
     						"compilers":"gcc", 
     						"platform_email": "",
@@ -188,7 +188,7 @@
 				"qt5": {
 					"description":"Mirror of upstream Qt5",					
 					"platforms": {
-    					"linux": {
+    					"ubuntu": {
     						"build":"true",
     						"compilers":"gcc", 
     						"platform_email": "",
@@ -327,7 +327,7 @@
 				"attica": {
 					"description":"Attica is a Qt library that implements the Open Collaboration Services API. \n Mailing list: http://lists.freedesktop.org/mailman/listinfo/ocs  \n Internet Relay Chat: #ocs@freenode",							
 					"platforms": {
-    					"linux": {
+    					"ubuntu": {
     						"build":"true",
     						"compilers":"gcc", 
     						"platform_email": "",

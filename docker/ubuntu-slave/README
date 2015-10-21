@@ -9,5 +9,5 @@ Run prepare_slaves in jenkins.
 
 On first run for a new slave the data volume containers. will need to be created.
 
-Run on the slave docker host 
+Run on the slave docker host ( must run prepare_slaves first )
 ./run-data-volumes-on-the-slave-host.sh
