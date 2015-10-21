@@ -9,7 +9,6 @@ import shlex
 from subprocess import STDOUT
 
 # Settings
-
 home = expanduser("~")
 hostname = socket.gethostname()
 repo_name=""
@@ -19,7 +18,8 @@ if sys.platform == "win32":
 	EMERGE_BASE="D:/kderoot"
 else:
 	scriptsLocation=home + "/scripts/"
-	
+
+os.environ["JENKINS_SLAVE_HOME"]=scriptsLocation	
 JENKINS_BRANCH="master"
 JENKINS_DEPENDENCY_BRANCH="master"
 
