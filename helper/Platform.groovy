@@ -94,8 +94,8 @@ class Platform {
 					runner(class: "org.jenkins_ci.plugins.run_condition.BuildStepRunner\$Fail")
 					buildStep(class: 'hudson.tasks.' + "${this.shell}") {
 						command "python ${home}/scripts/tools/update-setup.py \n" + \
-								"python ${home}/scripts/tools/prepare-environment.py"// + \
-								//' --platform ' + platform + ' --compiler ' + compiler.value
+								"python ${home}/scripts/tools/prepare-environment.py" + \
+								' --platform ' + platform + ' --compiler ' + compiler.value
 					}
 				}
 			}
