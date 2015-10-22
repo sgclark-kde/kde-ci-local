@@ -84,7 +84,8 @@ def check_jenkins_environment():
     # Do we have a job name?
     if 'JOB_NAME' in os.environ:
         # Split it out
-        jobMatch = re.match("(?P<project>[^\s]+)\s?(?P<branch>[^\s]+)\s?(?P<branchGroup>[^/]+)[[A-Z]=]?(?P<platform>[^=]$)[,[a-z]=]?(?P<compiler>[^=]$)?", os.environ['JOB_NAME'])
+        jobMatch = re.match("(?P<project>[^\s]+)\s?(?P<branch>[^\s]+)\s?(?P<branchGroup>[^/]+)?", os.environ['JOB_NAME'])
+        jobSearch = re.search("(?P<platform>[^[A-Z]=]$)[,[a-z]=]?(?P<compiler>[^[a-z]=]$)?")
         # Now transfer in any non-None attributes
         # If we have the project name, transfer it
         if jobMatch.group('project') is not None:
@@ -92,8 +93,8 @@ def check_jenkins_environment():
             # Determine our branch group, based on the given branch/base combo
             arguments.branchGroup = jobMatch.group('branchGroup')             
             arguments.branch = jobMatch.group('branch')
-            arguments.platform = jobMatch.group('platform')
-            arguments.compiler = jobMatch.group('compiler')
+            arguments.platform = jobSearch.group('platform')
+            arguments.compiler = jobSearch.group('compiler')
     # Do we have a workspace?
     if 'WORKSPACE' in os.environ:
         # Transfer it
