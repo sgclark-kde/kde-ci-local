@@ -92,9 +92,14 @@ def check_jenkins_environment():
             # Determine our branch group, based on the given branch/base combo
             arguments.branchGroup = jobMatch.group('branchGroup')             
             arguments.branch = jobMatch.group('branch')
-            # Someday when I can figure out blackmagic called regex these can be configured here.
-            #arguments.platform = jobSearch.group('platform')
-            #arguments.compiler = jobSearch.group('compiler')
+    
+    # Platform and compiler can be added to regex when I/someone sorts out the regex..        
+    if 'PLATFORM' in os.environ:
+        arguments.platform = os.environ['PLATFORM']
+        
+    if 'compiler' in os.environ:
+        arguments.platform = os.environ['compiler']
+           
     # Do we have a workspace?
     if 'WORKSPACE' in os.environ:
         # Transfer it
@@ -104,8 +109,8 @@ def check_jenkins_environment():
     if 'Variation' in os.environ:
         # We need this to determine our specific build variation
         arguments.variation = os.environ['Variation']
-
-        # Do we need to change into the proper working directory?
+    
+    # Do we need to change into the proper working directory?
     if 'JENKINS_SLAVE_HOME' in os.environ: os.chdir( os.environ['JENKINS_SLAVE_HOME'] ) 
     else: os.chdir( expanduser("~") + "/scripts/" ) 
 
