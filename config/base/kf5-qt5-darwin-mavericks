@@ -1,0 +1,27 @@
+# not needed on osx
+frameworks/kauth: -kdesupport/polkit-qt-1
+
+# Extragear
+extragear/multimedia/plasma-mediacenter: -general/mockcpp
+
+# Extragear Office
+# Do not depend on kdepimlibs on OSX/CI for now because of akonadi
+extragear/office/kmymoney: -kde/kdepimlibs
+extragear/office/skrooge: -kdesupport/qca
+
+# KDE/Applications
+kde/applications/kde-baseapps: -kde/kdelibs/baloo-widgets
+kde/applications/kde-baseapps: -general/poppler
+
+# Extragear Network
+extragear/network/konversation: -kdesupport/qca
+
+# kdesdk
+kde/kdesdk/okteta: -kdesupport/qca
+
+# Extragear Graphics
+extragear/graphics/digikam: -kde/kdegraphics/libs/libkgeomap
+
+# KDE Graphics
+kde/kdegraphics/okular: -kde/workspace/libkscreen
+kde/kdegraphics/svgpart: -kdesupport/polkit-qt-1
