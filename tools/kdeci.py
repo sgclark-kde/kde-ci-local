@@ -51,11 +51,9 @@ def check_jenkins_environment():
         jobMatch = re.match("(?P<project>[^\s]+)\s?(?P<branch>[^\s]+)\s?(?P<branchGroup>[^/]+)?", os.environ['JOB_NAME'])
         # Now transfer in any non-None attributes
         # If we have the project name, transfer it
-        if jobMatch.group('project') is not None:
-            arguments.project = jobMatch.group('project')
-            # Determine our branch group, based on the given branch/base combo
-            arguments.branchGroup = jobMatch.group('branchGroup')             
-            arguments.branch = jobMatch.group('branch')
+        arguments.project = jobMatch.group('project')        
+        arguments.branchGroup = jobMatch.group('branchGroup')             
+        arguments.branch = jobMatch.group('branch')
     
     # Platform and compiler can be added to regex when I/someone sorts out the regex..        
     if 'PLATFORM' in os.environ:
