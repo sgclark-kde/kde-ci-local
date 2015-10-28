@@ -98,7 +98,7 @@ def check_jenkins_environment():
         arguments.platform = os.environ['PLATFORM']
         
     if 'compiler' in os.environ:
-        arguments.platform = os.environ['compiler']
+        arguments.compiler = os.environ['compiler']
            
     # Do we have a workspace?
     if 'WORKSPACE' in os.environ:

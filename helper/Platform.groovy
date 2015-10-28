@@ -95,7 +95,7 @@ class Platform {
 					buildStep(class: 'hudson.tasks.' + "${this.shell}") {
 						command "python ${home}/scripts/tools/update-setup.py \n" + \
 								"python ${home}/scripts/tools/prepare-environment.py" + \
-								' --platform ' + platform + ' --compiler ' + compiler
+								' --platform ' + platform + ' --compiler ' + compiler.value
 					}
 				}
 			}
