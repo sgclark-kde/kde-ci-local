@@ -57,29 +57,29 @@ def check_jenkins_environment():
             arguments.branchGroup = jobMatch.group('branchGroup')             
             arguments.branch = jobMatch.group('branch')
             
-        if 'PLATFORM' in os.environ:
-            arguments.platform = os.environ('PLATFORM')
+    if 'PLATFORM' in os.environ:
+        arguments.platform = os.environ('PLATFORM')
             
-        if 'compiler' in os.environ:
-            arguments.compiler = os.environ('compiler')
+    if 'compiler' in os.environ:
+        arguments.compiler = os.environ('compiler')
            
-        # Do we have a workspace?
-        if 'WORKSPACE' in os.environ:
-            arguments.sources = os.environ['WORKSPACE']
+    # Do we have a workspace?
+    if 'WORKSPACE' in os.environ:
+        arguments.sources = os.environ['WORKSPACE']
 
-        # Do we have a build variation?
-        if 'Variation' in os.environ:
-            # We need this to determine our specific build variation
-            arguments.variation = os.environ['Variation']
+    # Do we have a build variation?
+    if 'Variation' in os.environ:
+        # We need this to determine our specific build variation
+        arguments.variation = os.environ['Variation']
     
-                    # Do we need to change into the proper working directory?
-        if 'JENKINS_SLAVE_HOME' in os.environ: 
-            os.chdir( os.environ['JENKINS_SLAVE_HOME'] ) 
-        else: 
-            os.chdir( expanduser("~") + "/scripts/" ) 
+    # Do we need to change into the proper working directory?
+    if 'JENKINS_SLAVE_HOME' in os.environ: 
+        os.chdir( os.environ['JENKINS_SLAVE_HOME'] ) 
+    else: 
+        os.chdir( expanduser("~") + "/scripts/" ) 
         
-            print arguments
-            return arguments
+        print arguments
+        return arguments
 
 def load_project_configuration( project, branchGroup, platform, compiler, variation = None ):
     # Create a configuration parser
