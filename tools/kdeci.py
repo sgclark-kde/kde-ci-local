@@ -51,7 +51,7 @@ def check_jenkins_environment():
         platformFind = re.search(r'(?P<project>\w+)\s(?P<branch>\w+)\s(?P<branchGroup>\w+)/PLATFORM=(?P<platform>\w+),compiler=(?P<compiler>\w+)', os.environ['JOB_NAME'])
         # Now transfer in any non-None attributes
         # If we have the project name, transfer it
-        if jobMatch.group('project') is not None:
+        if platformFind.group('project') is not None:
             arguments.project = platformFind.group('project')
             # Determine our branch group, based on the given branch/base combo
             arguments.branchGroup = platformFind.group('branchGroup')             
