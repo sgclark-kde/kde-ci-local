@@ -1,6 +1,0 @@
-# Everything needs CMake, Qt 5 and Extra CMake Modules
-*: qt5
-*: kdesupport/extra-cmake-modules
-
-# Qt 5
-qt5: -kdesupport/extra-cmake-modules 
