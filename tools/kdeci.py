@@ -49,7 +49,7 @@ def check_jenkins_environment():
     if 'JOB_NAME' in os.environ:
         # Split it out
         jobMatch = re.match("(?P<project>[^\s]+)\s?(?P<branch>[^\s]+)\s?(?P<branchGroup>[^/]+)?", os.environ['JOB_NAME'])
-        platformFind = re.findall("(?P<platform>[^,PLATFORM=]+?)?(?P<compiler>[^,compiler=]+?)?", os.environ['JOB_NAME'])
+        platformFind = re.search("(?P<platform>[^PLATFORM=]+),(?P<compiler>[^compiler=]+)", os.environ['JOB_NAME'])
         # Now transfer in any non-None attributes
         # If we have the project name, transfer it
         if jobMatch.group('project') is not None:
