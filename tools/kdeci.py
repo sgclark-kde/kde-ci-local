@@ -57,11 +57,11 @@ def check_jenkins_environment():
             arguments.branchGroup = jobMatch.group('branchGroup')             
             arguments.branch = jobMatch.group('branch')
             
-    if 'PLATFORM' in os.environ:
-        arguments.platform = os.environ('PLATFORM')
-            
-    if 'compiler' in os.environ:
-        arguments.compiler = os.environ('compiler')
+#     if 'PLATFORM' in os.environ:
+#         arguments.platform = os.environ('PLATFORM')
+#             
+#     if 'compiler' in os.environ:
+#         arguments.compiler = os.environ('compiler')
            
     # Do we have a workspace?
     if 'WORKSPACE' in os.environ:
