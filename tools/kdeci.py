@@ -58,7 +58,7 @@ def check_jenkins_environment():
             arguments.branch = jobMatch.group('branch')
             
         if 'PLATFORM' in os.environ:
-            arguments.platform = os.environ('platform')
+            arguments.platform = os.environ('PLATFORM')
             
         if 'compiler' in os.environ:
             arguments.compiler = os.environ('compiler')
