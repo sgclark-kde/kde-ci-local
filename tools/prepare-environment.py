@@ -25,40 +25,8 @@ print arguments.project
 print arguments.branchGroup
 print arguments.platform
 print arguments.compiler
-#if not load_all_projects( 'metadata/kde_projects.json', 'config/projects'):
-#	sys.exit("Failure to load projects - unable to continue")
-def load_all_projects( projectFile, configDirectory):
-    data_file = json.loads(open(projectFile).read()) 
-    # Now load the list of projects into the project manager    
-    try:
-        ProjectManager.load_projects( data_file )
-    except:          
-        return False
-
-#   # Load the branch group data now
-#    with open(moduleStructure, 'r') as fileHandle:
-#    ProjectManager.setup_branch_groups( json.load(fileHandle) )
-
-    # Finally, load special projects
-    for dirname, dirnames, filenames in os.walk( configDirectory ):
-        for filename in filenames:
-            filePath = os.path.join( dirname, filename )
-            ProjectManager.load_extra_project( filePath )
-
-            # We are successful
-            return True
-
-class ProjectManager(object):
-    @staticmethod
-    def load_projects(data_file):
-        # Get a list of all repositories, then create projects for them
-        
-        for x in data_file:
-            repoData = (x['repositories'])
-            for repos in repoData:
-                pprint( repos )
-                projectData = repos.getParent()
-                pprint( projectData )
+if not load_all_projects( 'metadata/kde_projects.json', 'config/projects'):
+	sys.exit("Failure to load projects - unable to continue")
 
 # # Load the requested project
 # project = ProjectManager.lookup( arguments.project )

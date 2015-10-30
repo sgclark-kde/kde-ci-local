@@ -233,83 +233,83 @@
 					"products_needed": {
 					},			
 					"repositories": {
-					"qt5/qt5": {					
-						"protocol": {
-							"git": {
-								"access": "read-only",
-								"address": "git://anongit.kde.org/qt/qt5"
-							},
-							"http": {
-								"access": "read-only",
-								"address": "http://anongit.kde.org/qt/qt5"
-							},
-							"ssh": {
-								"access": "read+write",
-								"address": "git@git.kde.org:qt/qt5"
-							},
-							"tarball": {
-								"access": "read-only",
-								"address": "http://anongit.kde.org/qt/qt5/qt5-latest.tar.gz"
-							}
-						},					
-						"branch": {
-							"devel": "5.5",
-            				"minimum": "5.3",
-            				"stable": "5.4"
-            			}				
-					}
-				},
-				"excluded_repositories": [
-					"qt5/qtcanvas3d",
-					"qt5/qtx11extras",
-					"qt5/qtwebkit-examples-and-demos",
-					"qt5/qtfeedback",
-					"qt5/qttranslations",
-					"qt5/qttools",
-					"qt5/qtpim",
-					"qt5/qtquick1",
-					"qt5/qtlocation",
-					"qt5/qtwebkit-examples",
-					"qt5/qtsvg",
-					"qt5/qtimageformats",
-					"qt5/qtwayland",
-					"qt5/qtxmlpatterns",
-					"qt5/qtmacextras",
-					"qt5/qt3d",
-					"qt5/qtdeclarative",
-					"qt5/qtjsondb",
-					"qt5/qtsensors",
-					"qt5/qtquickcontrols",
-					"qt5/qtwebsockets",
-					"qt5/qtmultimedia",
-					"qt5/qtconnectivity",
-					"qt5/qlalr",
-					"qt5/qtsystems",
-					"qt5/qtrepotools",
-					"qt5/qtserialport",
-					"qt5/qtwebchannel",
-					"qt5/qtqa",
-					"qt5/qtdocgallery",
-					"qt5/qtwinextras",
-					"qt5/qtandroidextras",
-					"qt5/qtbase",
-					"qt5/qtdoc",
-					"qt5/qtactiveqt",
-					"qt5/qtscript",
-					"qt5/qtenginio",
-					"qt5/qtwebengine-chromium",
-					"qt5/qtgraphicaleffects",
-					"qt5/qtwebengine",
-					"qt5/qtwebkit"
-				],
-				"dependencies": {
-				},
-				"ci_overrides": {
-           			"logrotator":"-1,5,-1,-1",
-           			"downstream":"extra-cmake-modules",
-           			"priority": "1"
-           		},
-           		"active": "true"
+						"qt5/qt5": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "git://anongit.kde.org/qt/qt5"
+								},
+								"http": {
+									"access": "read-only",
+									"address": "http://anongit.kde.org/qt/qt5"
+								},
+								"ssh": {
+									"access": "read+write",
+									"address": "git@git.kde.org:qt/qt5"
+								},
+								"tarball": {
+									"access": "read-only",
+									"address": "http://anongit.kde.org/qt/qt5/qt5-latest.tar.gz"
+								}
+							},					
+							"branch": {
+								"devel": "5.5",
+            					"minimum": "5.3",
+            					"stable": "5.4"
+            				}				
+						}
+					},
+					"excluded_repositories": [
+						"qt5/qtcanvas3d",
+						"qt5/qtx11extras",
+						"qt5/qtwebkit-examples-and-demos",
+						"qt5/qtfeedback",
+						"qt5/qttranslations",
+						"qt5/qttools",
+						"qt5/qtpim",
+						"qt5/qtquick1",
+						"qt5/qtlocation",
+						"qt5/qtwebkit-examples",
+						"qt5/qtsvg",
+						"qt5/qtimageformats",
+						"qt5/qtwayland",
+						"qt5/qtxmlpatterns",
+						"qt5/qtmacextras",
+						"qt5/qt3d",
+						"qt5/qtdeclarative",
+						"qt5/qtjsondb",
+						"qt5/qtsensors",
+						"qt5/qtquickcontrols",
+						"qt5/qtwebsockets",
+						"qt5/qtmultimedia",
+						"qt5/qtconnectivity",
+						"qt5/qlalr",
+						"qt5/qtsystems",
+						"qt5/qtrepotools",
+						"qt5/qtserialport",
+						"qt5/qtwebchannel",
+						"qt5/qtqa",
+						"qt5/qtdocgallery",
+						"qt5/qtwinextras",
+						"qt5/qtandroidextras",
+						"qt5/qtbase",
+						"qt5/qtdoc",
+						"qt5/qtactiveqt",
+						"qt5/qtscript",
+						"qt5/qtenginio",
+						"qt5/qtwebengine-chromium",
+						"qt5/qtgraphicaleffects",
+						"qt5/qtwebengine",
+						"qt5/qtwebkit"
+					],
+					"dependencies": {
+					},
+					"ci_overrides": {
+           				"logrotator":"-1,5,-1,-1",
+           				"downstream":"extra-cmake-modules",
+           				"priority": "1"
+           			},
+           			"active": "true"
 				}
 			}	
 		},
@@ -317,12 +317,26 @@
 			"group_email": "",
 			"group_irc": "",
 			"branch_group_tracks": {
-						"kf5-qt5": "devel",
-						"kf5-qt5-patch": "devel",
-						"kf5-minimum": "minimum",
-						"kf5-qt5-stable": "devel",
-						"kf5-qt5-release": "release"
+				"kf5-qt5": "devel",
+				"kf5-qt5-patch": "devel",
+				"kf5-minimum": "minimum",
+				"kf5-qt5-stable": "devel",
+				"kf5-qt5-release": "release"
 			},
+			"frameworks/*": {
+				"devel": "master",
+            	"minimum": "master",
+            	"release": "v5.15",
+            	"patch": "master"
+            },
+            "dependencies": {
+            	"*": {
+            		"*": {
+            			"qt5/qt5": "devel",
+						"kdesupport/extra-cmake-modules" : "devel"
+					}
+            	}
+            },	
 			"projects": {
 				"attica": {
 					"description":"Attica is a Qt library that implements the Open Collaboration Services API. \n Mailing list: http://lists.freedesktop.org/mailman/listinfo/ocs  \n Internet Relay Chat: #ocs@freenode",							
@@ -378,7 +392,7 @@
 						}
 					},			
 					"repositories": {
-						"qt5/qt5": {					
+						"frameworks/attica": {					
 							"protocol": {
 								"git": {
 									"access": "read-only",
@@ -396,13 +410,7 @@
 									"access": "read-only",
 									"address": "http://anongit.kde.org/qt/qt5/qt5-latest.tar.gz"
 								}
-							},					
-							"branch": {
-								"devel": "master",
-            					"minimum": "master",
-            					"release": "v5.15",
-            					"patch": "master"
-            				}				
+							}										
 						}
 					},
 					"excluded_repositories": [					
@@ -416,7 +424,136 @@
            			"active": "true"
 				}
 			}	
-		}			
+		},
+		"Plasma": {
+			"group_email": "",
+			"group_irc": "",
+			"branch_group_tracks": {
+				"kf5-qt5": "devel",
+				"kf5-qt5-patch": "devel",
+				"kf5-qt5-stable": "stable",
+				"kf5-qt5-release": "stable"
+			},
+			"kde/workspace/*": {
+				"devel": "master",
+               	"stable": "v5.4.2"
+            	},
+            "dependencies": {
+            	"devel": {
+            		"qt5/qt5": "devel",
+					"kdesupport/extra-cmake-modules" : "devel"
+				},
+				"stable": {
+					"qt5/qt5": "stable",
+					"kdesupport/extra-cmake-modules" : "devel"
+				}            	
+            },	
+			"projects": {
+				"plasma-desktop": {
+					"description":"The Plasma Desktop",							
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel","stable"],
+							"VariationLinux":[] 		
+    					},
+    					"android": {
+    						"build":"true",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationAndroid":[]     		
+    					},
+    					"ubuntu-phone": {
+    						"build":"true",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":["devel"],
+							"VariationOSX":[]       						
+    					},
+    					"windows": {
+    						"build":"true",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":["devel"],
+							"VariationWindows":[]      		  				
+    					} 
+    				},
+    				"Variations":[],   		
+					"products_needed": {
+						"devel": {
+							"qt5": "devel"
+						},
+						"stable": {
+							"qt5": "stable"
+						}
+					},			
+					"repositories": {
+						"kde/workspace/plasma-desktop": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "git://anongit.kde.org/qt/qt5"
+								},
+								"http": {
+									"access": "read-only",
+									"address": "http://anongit.kde.org/qt/qt5"
+								},
+								"ssh": {
+									"access": "read+write",
+									"address": "git@git.kde.org:qt/qt5"
+								},
+								"tarball": {
+									"access": "read-only",
+									"address": "http://anongit.kde.org/qt/qt5/qt5-latest.tar.gz"
+								}
+							}										
+						}
+					},
+					"excluded_repositories": [					
+					],
+					"dependencies": {
+						"devel": {
+							"frameworks/kdoctools" : "devel",
+							"frameworks/ki18n" : "devel",
+							"frameworks/kcmutils" : "devel",
+							"frameworks/knewstuff" : "devel",
+							"frameworks/kdelibs4support" : "devel",
+							"frameworks/knotifyconfig" : "devel",
+							"frameworks/kdesu" : "devel",
+							"frameworks/krunner" : "devel",
+							"frameworks/kwallet" : "devel",
+							"frameworks/attica" : "devel",
+							"frameworks/plasma-framework" : "devel",
+							"frameworks/kpeople" : "devel",
+							"kde/workspace/systemsettings" : "devel",
+							"kde/workspace/powerdevil" : "devel",
+							"kde/workspace/ksysguard" : "devel",
+							"kde/workspace/oxygen" : "devel"
+						}
+					},
+					"ci_overrides": {           				
+           				"downstream":"",
+           				"priority": 10
+           			},
+           			"active": "true"
+				}
+			}	
+		}						
 	}
 }
 ]

@@ -41,6 +41,200 @@ import socket
 # Settings
 hostname = socket.gethostname()
 
+def localAwareJoin(local, *p):
+    if local:
+        return os.path.join(*p)
+    else:
+        return "/".join(p)
+
+def makeRelativeLocation(path):
+    if sys.platform == "win32":
+        return path[3:]
+    else:
+        return path[1:]
+
+class ProjectManager(object):
+    # Projects which we know, keyed by their identifier
+    _projects = {}
+    # Regex for the dependency rules
+    _dependencyRuleRe = re.compile(r"""
+        (?P<project>[^\[]+)
+        \s*
+        (?:
+            \[
+                (?P<project_branch>[^ ]+)
+            \]
+        )?
+        \s*
+        :
+        \s*
+        (?P<ignore_dependency>-)?
+        (?P<dependency>[^\[]+)
+        \s*
+        (:?
+            \[
+                (?P<dependency_branch>[^ ]+)
+            \]
+        )?
+        """,re.X)
+
+    # Sets up a project from a configuration file
+    @staticmethod
+    def load_extra_project( projectFilename ):
+        # Read the project configuration
+        projectData = ConfigParser.SafeConfigParser()
+        projectData.read( projectFilename )
+
+        # Determine if we already know a project by this name (ie. override rather than create)
+        identifier = projectData.get('Project', 'identifier')
+        project = ProjectManager.lookup( identifier )
+        if project is None:
+            project = Project()
+            project.identifier = identifier
+            ProjectManager._projects[ project.identifier ] = project
+
+        # Are we overriding the path?
+        if projectData.has_option('Project', 'path'):
+            project.path = projectData.get('Project', 'path')
+
+        # Are we overriding the url?
+        if projectData.has_option('Project', 'url'):
+            project.url = projectData.get('Project', 'url')
+
+        # Are we changing the general dependency state?
+        if projectData.has_option('Project', 'sharedDependency'):
+            project.sharedDependency = projectData.getboolean('Project', 'sharedDependency')
+
+        # Are we registering any branch group associations?
+        if projectData.has_section('BranchGroups'):
+            for symName in projectData.options('BranchGroups'):
+                project.branchGroups[ symName ] = projectData.get('SymbolicBranches', symName)
+
+    # Load the kde_projects.xml data in
+    @staticmethod
+    def load_projects( object ):
+        # Get a list of all repositories, then create projects for them
+        data_file = json.loads(open('kde_projects.json').read()) 
+         for x in data_file:
+             repoData = (x['repositories'])
+             for repos in repoData:
+                 pprint( repos )
+                 projectData = repos.getParent()
+                 pprint( projectData )
+            # Create the new project and set the bare essentials
+            project = Project()
+            project.identifier = projectData.get('identifier')
+            project.path = projectData.find('path').text
+            project.url = repoData.find('url[@protocol="git"]').text
+
+            # What branches has this project got?
+            for branchItem in repoData.iterfind('branch'):
+                # Maybe this branch is invalid?
+                if branchItem.text is None or branchItem.text == 'none':
+                    continue
+
+                # Must be a normal branch then
+                project.branches.append( branchItem.text )
+
+            # Register this project now - all setup is completed
+            ProjectManager._projects[ project.identifier ] = project
+
+    # Load in information concerning project branch groups
+    @staticmethod
+    def setup_branch_groups( moduleStructure ):
+        # Let's go over the given groups and categorise them appropriately
+        for entry, groups in moduleStructure['groups'].items():
+            # If it is dynamic, then store it away appropriately
+            if entry[-1] == '*':
+                Project.wildcardBranchGroups[entry] = groups
+                continue
+
+            # If it isn't dynamic, then find out the project it belongs to
+            project = ProjectManager.lookup( entry )
+            if project != None:
+                project.branchGroups = groups
+
+    # Setup ignored project metadata
+    @staticmethod
+    def setup_ignored( ignoreData ):
+        # First, remove any empty lines as well as comments
+        ignoreList = [ project.strip() for project in ignoreData if project.find("#") == -1 and project.strip() ]
+        # Now mark any listed project as ignored
+        for entry in ignoreList:
+            project = ProjectManager.lookup( entry )
+            project.ignore = True
+
+    # Setup the dependencies from kde-projects.json
+    @staticmethod
+    def setup_dependencies( depData ):
+        for depEntry in depData:
+            # Cleanup the dependency entry and remove any comments
+            commentPos = depEntry.find("#")
+            if commentPos >= 0:
+                depEntry = depEntry[0:commentPos]
+
+            # Prepare to extract the data and skip if the extraction fails
+            match = ProjectManager._dependencyRuleRe.search( depEntry.strip() )
+            if not match:
+                continue
+
+            # Determine which project is being assigned the dependency
+            projectName = match.group('project').lower()
+            project = ProjectManager.lookup( projectName )
+            # Validate it (if the project lookup failed and it is not dynamic, then it is a virtual dependency)
+            if project == None and projectName[-1] != '*':
+                # Create the virtual dependency
+                project = Project()
+                project.path = projectName
+                project.virtualDependency = True
+                # Generate an identifier for it
+                splitted = projectName.split('/')
+                project.identifier = splitted[-1]
+                # Now register it - we can continue normally after this
+                ProjectManager._projects[ project.identifier ] = project
+
+            # Ensure we know the dependency - if it is marked as "ignore" then we skip this
+            dependencyName = match.group('dependency').lower()
+            dependency = ProjectManager.lookup( dependencyName )
+            if dependency == None or dependency.ignore:
+                continue
+
+            # Are any branches specified for the project or dependency?
+            projectBranch = dependencyBranch = '*'
+            if match.group('project_branch'):
+                projectBranch = match.group('project_branch')
+            if match.group('dependency_branch'):
+                dependencyBranch = match.group('dependency_branch')
+
+            # Is this a dynamic project?
+            if projectName[-1] == '*':
+                dependencyEntry = ( projectName, projectBranch, dependency, dependencyBranch )
+                # Is it negated or not?
+                if match.group('ignore_dependency'):
+                    Project.dynamicNegatedDeps.append( dependencyEntry )
+                else:
+                    Project.dynamicDependencies.append( dependencyEntry )
+            # Otherwise it must be a project specific rule
+            else:
+                dependencyEntry = ( dependency, dependencyBranch )
+                # Is it negated or not?
+                if match.group('ignore_dependency'):
+                    project.negatedDeps[ projectBranch ].append( dependencyEntry )
+                else:
+                    project.dependencies[ projectBranch ].append( dependencyEntry )
+
+    # Lookup the given project name
+    @staticmethod
+    def lookup( projectName ):
+        # We may have been passed a path, reduce it down to a identifier
+        splitted = projectName.split('/')
+        identifier = splitted[-1]
+        # Now we try to return the desired project
+        try:
+            return ProjectManager._projects[identifier]
+        except Exception:
+            return
+
 def check_jenkins_environment():
     # Prepare
     arguments = argparse.Namespace()
@@ -96,17 +290,24 @@ def load_project_configuration( project, branchGroup, platform, compiler, variat
         # All done, return the configuration        
         return config
         
-def load_all_projects( projectFile, configDirectory):
+def load_all_projects( projectFile, configDirectory ):
     data_file = json.loads(open(projectFile).read()) 
     # Now load the list of projects into the project manager    
     try:
         ProjectManager.load_projects( data_file )
     except:          
         return False
+    
+    # Now load the list of projects into the project manager
+    with open(projectFile, 'r') as fileHandle:
+        try:
+            ProjectManager.load_projects( json.load(fileHandle) )
+        except:            
+            return False
 
-#   # Load the branch group data now
-#    with open(moduleStructure, 'r') as fileHandle:
-#    ProjectManager.setup_branch_groups( json.load(fileHandle) )
+    # Load the branch group data now
+    with open(projectFile, 'r') as fileHandle:
+        ProjectManager.setup_branch_groups( json.load(fileHandle) )
 
     # Finally, load special projects
     for dirname, dirnames, filenames in os.walk( configDirectory ):
@@ -114,17 +315,6 @@ def load_all_projects( projectFile, configDirectory):
             filePath = os.path.join( dirname, filename )
             ProjectManager.load_extra_project( filePath )
 
-            # We are successful
-            return True
+    # We are successful
+    return True
 
-class ProjectManager(object):
-    @staticmethod
-    def load_projects(data_file):
-        # Get a list of all repositories, then create projects for them
-        
-        for x in data_file:
-            repoData = (x['repositories'])
-            for repos in repoData:
-                pprint( repos )
-                projectData = repos.getParent()
-                pprint( projectData )
