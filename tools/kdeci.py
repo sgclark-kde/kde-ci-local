@@ -115,12 +115,12 @@ class ProjectManager(object):
     def load_projects( object ):
         # Get a list of all repositories, then create projects for them
         data_file = json.loads(open('kde_projects.json').read()) 
-         for x in data_file:
-             repoData = (x['repositories'])
-             for repos in repoData:
-                 pprint( repos )
-                 projectData = repos.getParent()
-                 pprint( projectData )
+        for x in data_file:
+            repoData = (x['repositories'])
+            for repos in repoData:
+                pprint( repos )
+                projectData = repos.getParent()
+                pprint( projectData )
             # Create the new project and set the bare essentials
             project = Project()
             project.identifier = projectData.get('identifier')
