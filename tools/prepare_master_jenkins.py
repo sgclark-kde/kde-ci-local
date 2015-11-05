@@ -35,7 +35,7 @@ with open(home + '/manager_auth.txt') as f:
   credentials = [x.strip().split(':') for x in f.readlines()]
 
 for username,password in credentials:
-    jenkins_url = "https://build-sandbox.kde.org"
+    jenkins_url = 'https://build-sandbox.kde.org/pluginManager/installNecessaryPlugins'
     username = username
     api_token = password
 
@@ -46,7 +46,6 @@ auth_handler.add_password(
     user=username,
     passwd=api_token)
 opener = urllib2.build_opener(auth_handler)
-urllib2.install_opener(opener)
     
 data_file = json.loads(open('master_plugins.json').read())   
 
@@ -54,7 +53,7 @@ for x in data_file:
   all_plugins = (x['plugins'])
   for plugin in all_plugins:
     data = '<jenkins><install plugin="' + plugin + '@latest" /></jenkins>'
-    url = 'https://build-sandbox.kde.org/pluginManager/installNecessaryPlugins'
+    url = urllib2.install_opener(opener)
     req = urllib2.Request(url, data, {'Content-Type': 'text/xml'})
     f = urllib2.urlopen(req)
     for y in f:
