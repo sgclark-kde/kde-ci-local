@@ -31,7 +31,7 @@ class PreemptiveBasicAuthHandler(urllib2.HTTPBasicAuthHandler):
 
     https_request = http_request
 
-with open('manager_auth.txt') as f:
+with open(home + '/manager_auth.txt') as f:
   credentials = [x.strip().split(':') for x in f.readlines()]
 
 for username,password in credentials:
