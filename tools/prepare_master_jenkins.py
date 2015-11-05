@@ -11,8 +11,6 @@ from pprint import pprint
 
 home = expanduser("~")
 
-cred_file = json.loads(open( home + '/manager_auth.txt').read())   
-
 class PreemptiveBasicAuthHandler(urllib2.HTTPBasicAuthHandler):
     '''Preemptive basic auth.
 
