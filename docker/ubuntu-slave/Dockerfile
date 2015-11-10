@@ -190,7 +190,7 @@ RUN apt-get -y install ssh \
 
 RUN mkdir -p /var/run/sshd
 RUN /usr/sbin/sshd
-RUN useradd -m -d /home/jenkins jenkins
+RUN useradd -m -u 1000 -g 1000 -d /home/jenkins jenkins
 RUN echo 'jenkins:1234' | chpasswd #changeme
 
 #Our scripts install to here:
@@ -198,5 +198,5 @@ RUN mkdir /srv/jenkins && chown jenkins:jenkins /srv/jenkins
 
 EXPOSE 22
 
-VOLUME /home/jenkins:/home/jenkins HOME
+VOLUME /home/jenkins:/home/jenkins/.ssh HOMESSH
 VOLUME /srv/jenkins:/srv/jenkins INSTALL

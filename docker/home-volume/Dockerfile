@@ -25,9 +25,9 @@ ADD authorized_keys /home/jenkins/.ssh/
 RUN git clone https://github.com/sgclark-kde/kde-ci-local.git /home/jenkins/scripts
 
 USER root
-RUN chown -R jenkins.jenkins /home/jenkins 
+RUN chown -R jenkins.jenkins /home/jenkins/.ssh 
 
-VOLUME /home/jenkins
+VOLUME /home/jenkins/.ssh
 
 CMD ["/bin/sh"]
 CMD ["true"]
