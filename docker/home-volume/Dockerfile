@@ -17,10 +17,10 @@ RUN mkdir /home/jenkins/.ssh
 
 #These keys need to be in path (generated on your host and placed in /var/lib/jenkins/scripts/docker/home-volume on master)
 # Be sure to add these files to gitignore
-ADD /var/lib/jenkins/slave-keys/id_rsa /home/jenkins/.ssh/
-ADD /var/lib/jenkins/slave-keys/id_rsa.pub /home/jenkins/.ssh/
-ADD /var/lib/jenkins/slave-keys/known_hosts /home/jenkins/.ssh/
-ADD /var/lib/jenkins/slave-keys/authorized_keys /home/jenkins/.ssh/
+ADD id_rsa /home/jenkins/.ssh/
+ADD id_rsa.pub /home/jenkins/.ssh/
+ADD known_hosts /home/jenkins/.ssh/
+ADD authorized_keys /home/jenkins/.ssh/
 
 RUN git clone https://github.com/sgclark-kde/kde-ci-local.git /home/jenkins/scripts
 
