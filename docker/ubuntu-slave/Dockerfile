@@ -31,8 +31,7 @@ RUN apt-get -y install ssh \
     libxslt1-dev \
     docbook-xml \
     docbook-xsl \
-    libgcrypt-dev \
-    libboost1.55-dev \
+    libgcrypt-dev \    
     gcovr \
     libnm-glib-dev \
     libnm-util-dev \
@@ -59,15 +58,14 @@ RUN apt-get -y install ssh \
     libraw-dev \
     libxcb-image0-dev \
     libxcb-xkb-dev \
-    libxkbfile-dev \
-    libboost-system1.55-dev \
+    libxkbfile-dev \    
     libtag1-dev \
     libsamplerate0-dev \
     frei0r-plugins-dev \
     libeigen3-dev \
     libgettextpo-dev \
     libaccounts-glib-dev \    
-    libboost1.55-all-dev \
+    libboost1.58-all-dev \
     libglew-dev \
     libavutil-ffmpeg-dev \
     libavcodec-ffmpeg-dev \
@@ -84,7 +82,7 @@ RUN apt-get -y install ssh \
     xserver-xorg-input-wacom \
     libtelepathy-glib-dev \
     libgstreamer1.0-dev \
-    libfarstream-0.2-2 \
+    libfarstream-0.2-5 \
     libsvn-dev \
     libpci-dev \
     cmake \
@@ -162,7 +160,7 @@ RUN apt-get -y install ssh \
     libmtp-dev \
     libmusicbrainz3-dev \
     libvncserver-dev \
-    libgpgme++2 \
+    libgpgme++2v5 \
     subversion \
     libotr5-dev \
     python3-numpy \
