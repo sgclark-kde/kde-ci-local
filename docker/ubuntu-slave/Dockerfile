@@ -200,4 +200,4 @@ RUN mkdir /srv/jenkins && chown jenkins:jenkins /srv/jenkins
 EXPOSE 22
 
 VOLUME /home/jenkins:/home/jenkins/.ssh HOMESSH
-VOLUME /srv/jenkins:/srv/jenkins INSTALL
+VOLUME /srv/jenkins:/srv/jenkins/.ssh INSTALL

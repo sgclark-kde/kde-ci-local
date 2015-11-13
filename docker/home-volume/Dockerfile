@@ -17,6 +17,7 @@ ADD id_rsa /home/jenkins/.ssh/
 ADD id_rsa.pub /home/jenkins/.ssh/
 ADD known_hosts /home/jenkins/.ssh/
 ADD authorized_keys /home/jenkins/.ssh/
+ADD jenkins_install /home/jenkins/.ssh/
 
 USER root
 RUN chown -R jenkins.jenkins /home/jenkins/.ssh 
