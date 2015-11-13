@@ -2,6 +2,8 @@ FROM ubuntu:wily
 MAINTAINER Scarlett Clark <sgclark@kde.org>
 
 #Install Essentials up to qt5
+# Has to be unattended install obviously.
+RUN export DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get -y build-dep qtbase5-dev
 RUN apt-get update && apt-get -y install software-properties-common python-software-properties
