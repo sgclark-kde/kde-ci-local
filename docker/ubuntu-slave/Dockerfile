@@ -194,10 +194,7 @@ RUN groupadd -g 1000 jenkins
 RUN useradd -m -u 1000 -g 1000 -d /home/jenkins jenkins
 RUN echo 'jenkins:1234' | chpasswd #changeme
 
-#Our scripts install to here:
-RUN mkdir /srv/jenkins && chown jenkins:jenkins /srv/jenkins
-
 EXPOSE 22
 
-VOLUME /home/jenkins:/home/jenkins/.ssh HOMESSH
-VOLUME /srv/jenkins:/srv/jenkins/.ssh INSTALL
+VOLUME /home/jenkins/.ssh:/home/jenkins/.ssh HOMESSH
+VOLUME /srv/jenkins:/srv/jenkins/ INSTALL

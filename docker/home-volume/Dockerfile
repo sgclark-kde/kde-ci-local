@@ -12,7 +12,6 @@ RUN mkdir /home/jenkins/.ssh
 
 #These keys need to be in path (generated on your host and placed in /var/lib/jenkins/scripts/docker/home-volume on master)
 # Be sure to add these files to gitignore
-RUN pwd
 ADD id_rsa /home/jenkins/.ssh/
 ADD id_rsa.pub /home/jenkins/.ssh/
 ADD known_hosts /home/jenkins/.ssh/
