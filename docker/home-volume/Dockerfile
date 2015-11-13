@@ -4,11 +4,6 @@
 FROM ubuntu:trusty
 MAINTAINER Scarlett Clark <sgclark@kde.org>
 
-# These dependencies are needed to grab our tools
-RUN apt-get update && apt-get install -y python \
-	git \
-	ssh
-
 RUN groupadd -g 1000 jenkins
 RUN useradd -m -g 1000 -u 1000 -d /home/jenkins jenkins 
 
@@ -22,8 +17,6 @@ ADD id_rsa /home/jenkins/.ssh/
 ADD id_rsa.pub /home/jenkins/.ssh/
 ADD known_hosts /home/jenkins/.ssh/
 ADD authorized_keys /home/jenkins/.ssh/
-
-RUN git clone https://github.com/sgclark-kde/kde-ci-local.git /home/jenkins/scripts
 
 USER root
 RUN chown -R jenkins.jenkins /home/jenkins/.ssh 
