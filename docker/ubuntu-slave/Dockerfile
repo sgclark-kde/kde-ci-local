@@ -8,7 +8,7 @@ RUN apt-get update && apt-get upgrade -y
 RUN apt-get -y build-dep qtbase5-dev
 RUN apt-get update && apt-get -y install software-properties-common python-software-properties
 RUN apt-get -f install && add-apt-repository -y ppa:george-edison55/cmake-3.x && add-apt-repository -y ppa:ximion/packagekit && apt-add-repository -y ppa:mutlaqja/ppa
-RUN apt-get -y install ssh \
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install ssh \
 	sudo \
 	wget \
 	build-essential \
