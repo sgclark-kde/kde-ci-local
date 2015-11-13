@@ -190,6 +190,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install ssh \
 
 RUN mkdir -p /var/run/sshd
 RUN /usr/sbin/sshd
+RUN groupadd -g 1000 jenkins
 RUN useradd -m -u 1000 -g 1000 -d /home/jenkins jenkins
 RUN echo 'jenkins:1234' | chpasswd #changeme
 
