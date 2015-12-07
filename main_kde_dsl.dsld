@@ -166,7 +166,7 @@ groupData.each { groups ->
 						configure platformClosure
 						touchStoneFilter( 'PLATFORM=="Linux"' )
 											
-						//combinationFilter('(PLATFORM=="Linux" && compiler=="gcc")')					
+						combinationFilter('(PLATFORM=="Linux" && compiler=="gcc")')					
 						
 						configure compilerClosure
 						// We only need to create this matrix if the job has variations
@@ -184,7 +184,7 @@ groupData.each { groups ->
 					}
 
 					/* Create the actual build steps */
-					configure conditionalbyCombinations('Linux', new_platform.platformCompilers, jobname, branchGroup)
+					//configure conditionalbyCombinations('Linux', new_platform.platformCompilers, jobname, branchGroup)
 					configure createPublishers(new_platform.publishers, jobname, new_platform.platformCompilers)		
 				
 					}catch(Throwable e){}			
@@ -217,7 +217,7 @@ listView('External') {
     }
 }
 
-listView('External') {
+listView('default') {
 	description('All jobs for ' + view)
 	filterBuildQueue()
 	filterExecutors()
@@ -240,7 +240,7 @@ listView('External') {
 		buildButton()
 	}
 }
-listView('External') {
+listView('kf5-qt5') {
 	description('All jobs for ' + view)
 	filterBuildQueue()
 	filterExecutors()
