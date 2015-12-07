@@ -166,7 +166,7 @@ groupData.each { groups ->
 						configure platformClosure
 						touchStoneFilter( 'PLATFORM=="Linux"' )
 											
-						combinationFilter('(PLATFORM=="Linux" && compiler=="gcc")')					
+						//combinationFilter('(PLATFORM=="Linux" && compiler=="gcc")')					
 						
 						configure compilerClosure
 						// We only need to create this matrix if the job has variations
