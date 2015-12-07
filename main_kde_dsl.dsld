@@ -135,7 +135,7 @@ groupData.each { groups ->
 							}
 						}
 						
-						if (branchGroup =~ "qt4") {
+						if (track.key =~ "qt4") {
 							configure { project ->
 								project.name = 'matrix-project'
 								project / 'properties' << 'jp.ikedam.jenkins.plugins.groovy_label_assignment.GroovyLabelAssignmentProperty' {
