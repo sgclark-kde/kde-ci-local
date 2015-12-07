@@ -106,8 +106,9 @@ groupData.each { groups ->
 					matrixJob("${jobname} ${branch} ${track.key} ${view}".replaceAll('/','-')) {
 						configure { project ->
 							project / 'actions' {}
+							project << authToken("PNcTKQORJW653QKVTwL0GV64OZA-${jobname}")
 							if(view != 'External') {
-								project << authToken("PNcTKQORJW653QKVTwL0GV64OZA-${jobname}")
+								println view  + jobname
 							}
 						}
 						description "${CIVars.description}\n ${branch} build for ${jobname}"		
@@ -128,11 +129,11 @@ groupData.each { groups ->
 							maxPerNode 1
 							maxTotal 2 
 						}
-						/*if (jobname =~ "kolab")	{
+						if (jobname =~ "kolab")	{
 							environmentVariables {
 								env('GIT_SSL_NO_VERIFY', '1')
 							}
-						}*/
+						}
 						
 						/*if (branchGroup =~ "qt4") {
 							configure { project ->
