@@ -19,9 +19,6 @@ from distutils import dir_util
 from lxml import etree
 from collections import defaultdict
 from os.path import expanduser
-import urllib2
-from pprint import pprint
-
 
 # Settings
 hostname = socket.gethostname()
@@ -97,15 +94,12 @@ class ProjectManager(object):
 
 	# Load the kde_projects.xml data in
 	@staticmethod
-	def load_projects( object ):
+	def load_projects( xmlData ):
 		# Get a list of all repositories, then create projects for them
-		data_file = json.loads(open('kde_projects.json').read()) 
- 		for x in data_file:
- 			repoData = (x['repositories'])
- 			for repos in repoData:
- 				pprint( repos )
- 				projectData = repos.getParent()
- 				pprint( projectData )
+		for repoData in xmlData.iterfind('.//repo'):
+			# Grab the actual project xml item
+			projectData = repoData.getparent()
+
 			# Create the new project and set the bare essentials
 			project = Project()
 			project.identifier = projectData.get('identifier')
@@ -460,7 +454,7 @@ class BuildManager(object):
 		# Add the source and destination to our arguments
 		rsyncCommand.append( source + '/' )
 		rsyncCommand.append( destination )
-		# Execute rsync and wait for it to finish
+		# Execute rsync and wait for it to finish	
 		process = subprocess.Popen( rsyncCommand, stdout=sys.stdout, stderr=sys.stderr )
 		process.wait()
 		# Indicate our success

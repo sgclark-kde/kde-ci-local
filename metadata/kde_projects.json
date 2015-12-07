@@ -21,7 +21,9 @@
     	"combinations":"default",
     	"priority": "100", 
     	"email": "sgclark@kde.org", 
-		"irc": "#kde-builds"		
+		"irc": "#kde-builds",
+		"publishers": "true", 
+		"view": "default"		
 	},
 	"groups": {
 		"external": {
@@ -34,48 +36,48 @@
 				"mlt": {
 					"branch_group_tracks": {						
 						"kf5-qt5": "devel",											
-						"kf5-qt5-stable": "stable"						
+						"kf5-qt5-stable": "devel"						
 					},
-					"description":"Mirror of upstream mlt",					
+					"description":"External Mirror of upstream mlt",					
 					"platforms": {
     					"ubuntu": {
     						"build":"true",
     						"compilers":"gcc", 
     						"platform_email": "",
 							"platform_irc": "",
-							"tracks":["qt4","devel","stable"],
+							"tracks":["devel"],
 							"VariationLinux":[]   		
     					},
     					"android": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"android_sdk",
     						"platform_email": "",
 							"platform_irc": "",
-							"tracks":["stable"],
+							"tracks":["devel"],
 							"VariationAndroid":[]       		
     					},
     					"ubuntu-phone": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"ubuntu_sdk",
     						"platform_email": "",
 							"platform_irc": "",
-							"tracks":["stable"],
+							"tracks":["devel"],
 							"VariationUbuntuP":[]     		
     					},
     					"osx": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"clang",
     						"platform_email": "",
 							"platform_irc": "kde-mac",
-							"tracks":["stable"],
+							"tracks":["devel"],
 							"VariationOSX":[]         						
     					},
     					"windows": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"vs2013",
     						"platform_email": "",
 							"platform_irc": "kde-windows",
-							"tracks":["stable"],
+							"tracks":["devel"],
 							"VariationWindows":[]      		  				
     					} 
     				},	
@@ -91,59 +93,142 @@
 								}							
 							},					
 							"branch": {
-								"devel": "master",            				
-            					"stable": "master"           					
-            				}
+								"devel": "master"           					          					
+            				},
+            				"showwebgit": "false",
+            				"token": "false",
+            				"poll": "weekly"	
             			}				
 					},									
 					"dependencies": {
 					},
 					"ci_overrides": {           			
            				"downstream":"kdenlive",    
-    					"email":"jb@kdenlive.org, kdenlive@kde.org"           			
+    					"email":"jb@kdenlive.org, kdenlive@kde.org" ,
+    					"publishers": "false",
+    					"job_view": "External"            			
            			}
            		},
-          		"libaccounts-qt": {
-					"description":"Mirror of upstream libaccounts-qt",					
+          		"automoc": {
+          			"branch_group_tracks": {
+						"stable-qt4": "qt4"									
+					},
+					"description":"External Mirror of upstream automoc",					
 					"platforms": {
     					"ubuntu": {
     						"build":"true",
     						"compilers":"gcc", 
     						"platform_email": "",
 							"platform_irc": "",
-							"tracks":["devel","stable"],
+							"tracks":["qt4"],
 							"VariationLinux":[]    		
     					},
     					"android": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"android_sdk",
     						"platform_email": "",
 							"platform_irc": "",
-							"tracks":["stable"],
+							"tracks":[""],
 							"VariationAndroid":[]       		
     					},
     					"ubuntu-phone": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"ubuntu_sdk",
     						"platform_email": "",
 							"platform_irc": "",
-							"tracks":["stable"],
+							"tracks":[""],
 							"VariationUbuntuP":[]     		
     					},
     					"osx": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"clang",
     						"platform_email": "",
 							"platform_irc": "kde-mac",
-							"tracks":["devel","stable"],
+							"tracks":[""],
 							"VariationOSX":[]         						
     					},
     					"windows": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"vs2013",
     						"platform_email": "",
 							"platform_irc": "kde-windows",
-							"tracks":["stable"],
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/automoc": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "git://anongit.kde.org/automoc"
+								}							
+							},					
+							"branch": {
+								"qt4": "master"
+
+            				},
+            				"showwebgit": "true",
+            				"token": "false",
+            				"poll": "weekly"					
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {      			
+    					"publishers": "false",
+    					"job_view": "External"  
+           			}
+           		},
+           		"libaccounts-qt": {
+           			"branch_group_tracks": {
+           				"qt4-stable": "devel",						
+						"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"						
+					},  
+					"description":"External Mirror of upstream libaccounts-qt",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":["devel"],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":["devel"],
 							"VariationWindows":[]      		  				
     					} 
     				},	
@@ -159,210 +244,1382 @@
 								}							
 							},					
 							"branch": {
-								"devel": "master",            				
-            					"stable": "master"
-            				}				
+								"devel": "master"            					
+            				},
+            				"showwebgit": "true",
+            				"token": "false",
+            				"poll": "weekly"					
 						}
 					},				
 					"dependencies": {
 					},
 					"ci_overrides": {           			
-           			    "downstream":"kaccounts-integration",        					
-    					"email":"mklapetek@kde.org ",
-    					"irc":"#kde-telepathy",
-    					"combinations":"Linux"        			
+    					"combinations":"Linux",
+    					"publishers": "false"    					       			
            			}
-           		}
-           	}           		
-		},
-		"Qt5": {
-			"group_email": "",
-			"group_irc": "",
-			"branch_group_tracks": {
-						"kf5-qt5": "devel",
-						"kf5-qt5-patch": "devel",
-						"kf5-minimum": "minimum",
-						"kf5-qt5-stable": "stable"
-			},
-			"projects": {
-				"qt5": {
-					"description":"Mirror of upstream Qt5",					
+           		},          		
+           		"avogadrolibs": {
+           			"branch_group_tracks": {						
+						"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"						
+					},
+					"description":"Mirror of upstream avogadrolibs",					
 					"platforms": {
     					"ubuntu": {
     						"build":"true",
     						"compilers":"gcc", 
     						"platform_email": "",
 							"platform_irc": "",
-							"tracks":["devel","minimum","stable"],
+							"tracks":["devel"],
 							"VariationLinux":[]    		
     					},
     					"android": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"android_sdk",
     						"platform_email": "",
 							"platform_irc": "",
-							"tracks":["devel","stable"],
+							"tracks":["devel"],
 							"VariationAndroid":[]       		
     					},
     					"ubuntu-phone": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"ubuntu_sdk",
     						"platform_email": "",
 							"platform_irc": "",
-							"tracks":["devel","stable"],
+							"tracks":["devel"],
 							"VariationUbuntuP":[]     		
     					},
     					"osx": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"clang",
     						"platform_email": "",
 							"platform_irc": "kde-mac",
-							"tracks":["devel","stable"],
+							"tracks":["devel"],
 							"VariationOSX":[]         						
     					},
     					"windows": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"vs2013",
     						"platform_email": "",
 							"platform_irc": "kde-windows",
-							"tracks":["devel","stable"],
+							"tracks":["devel"],
 							"VariationWindows":[]      		  				
     					} 
-    				},  
+    				},	
     				"Variations":[],   		
 					"products_needed": {
-					},			
+					},									
 					"repositories": {
-						"qt5/qt5": {					
+						"general/avogadrolibs": {					
 							"protocol": {
 								"git": {
 									"access": "read-only",
-									"address": "git://anongit.kde.org/qt/qt5"
-								},
-								"http": {
-									"access": "read-only",
-									"address": "http://anongit.kde.org/qt/qt5"
-								},
-								"ssh": {
-									"access": "read+write",
-									"address": "git@git.kde.org:qt/qt5"
-								},
-								"tarball": {
-									"access": "read-only",
-									"address": "http://anongit.kde.org/qt/qt5/qt5-latest.tar.gz"
-								}
+									"address": "https://github.com/OpenChemistry/avogadrolibs.git"
+								}							
 							},					
 							"branch": {
-								"devel": "5.5",
-            					"minimum": "5.3",
-            					"stable": "5.4"
-            				}				
+								"devel": "master"           					
+            				},
+            				"showwebgit": "false",
+            				"token": "false",
+            				"poll": "weekly"					
 						}
+					},				
+					"dependencies": {
 					},
-					"excluded_repositories": [
-						"qt5/qtcanvas3d",
-						"qt5/qtx11extras",
-						"qt5/qtwebkit-examples-and-demos",
-						"qt5/qtfeedback",
-						"qt5/qttranslations",
-						"qt5/qttools",
-						"qt5/qtpim",
-						"qt5/qtquick1",
-						"qt5/qtlocation",
-						"qt5/qtwebkit-examples",
-						"qt5/qtsvg",
-						"qt5/qtimageformats",
-						"qt5/qtwayland",
-						"qt5/qtxmlpatterns",
-						"qt5/qtmacextras",
-						"qt5/qt3d",
-						"qt5/qtdeclarative",
-						"qt5/qtjsondb",
-						"qt5/qtsensors",
-						"qt5/qtquickcontrols",
-						"qt5/qtwebsockets",
-						"qt5/qtmultimedia",
-						"qt5/qtconnectivity",
-						"qt5/qlalr",
-						"qt5/qtsystems",
-						"qt5/qtrepotools",
-						"qt5/qtserialport",
-						"qt5/qtwebchannel",
-						"qt5/qtqa",
-						"qt5/qtdocgallery",
-						"qt5/qtwinextras",
-						"qt5/qtandroidextras",
-						"qt5/qtbase",
-						"qt5/qtdoc",
-						"qt5/qtactiveqt",
-						"qt5/qtscript",
-						"qt5/qtenginio",
-						"qt5/qtwebengine-chromium",
-						"qt5/qtgraphicaleffects",
-						"qt5/qtwebengine",
-						"qt5/qtwebkit"
-					],
+					"ci_overrides": {      			
+    					"publishers": "false",
+    					"job_view": "External"  
+           			}
+           		},
+           		"grantlee": { 
+           			"branch_group_tracks": {
+						"stable-qt4": "qt4",
+						"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"						
+					},          		
+					"description":"Mirror of upstream Grantlee",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["qt4","devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":["devel"],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":["devel"],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/grantlee": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "git://github.com/steveire/grantlee.git"
+								}							
+							},					
+							"branch": {
+								"qt4": "v0.5.0",
+								"devel": "master"           					
+            				},
+            				"showwebgit": "false",
+            				"token": "false",
+            				"poll": "weekly"					
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {      			
+    					"publishers": "false",
+    					"job_view": "External"  
+           			}
+           		},
+           		"libaccounts-glib": { 
+           			"branch_group_tracks": {						
+						"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"						
+					},          		
+					"description":"Mirror of upstream libaccounts-glib",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":["devel"],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":["devel"],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/automoc": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "https://gitlab.com/accounts-sso/libaccounts-glib.git"
+								}							
+							},					
+							"branch": {								
+								"devel": "master"           					
+            				},
+            				"showwebgit": "false",
+            				"token": "false",
+            				"poll": "weekly"					
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {      			
+    					"publishers": "false",
+    					"job_view": "External"  
+           			}
+           		},
+           		"libgit2": { 
+           			"branch_group_tracks": {           									
+						"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"						
+					},          		
+					"description":"Mirror of upstream libgit2",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":["devel"],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":["devel"],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/libgit2": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "https://github.com/libgit2/libgit2.git"
+								}							
+							},					
+							"branch": {								
+								"devel": "v0.22.2"           					
+            				},
+            				"showwebgit": "false",
+            				"token": "false",
+            				"poll": "weekly"					
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {  
+						"publishers": "false",
+						"job_view": "External"    			
+           			}
+           		},
+           		"libqgit2": { 
+           			"branch_group_tracks": {
+						"stable-qt4": "devel",
+						"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"						
+					},          		
+					"description":"Mirror of upstream libqgit2",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":["devel"],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":["devel"],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/libqgit2": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "git://anongit.kde.org/libqgit2"
+								}							
+							},					
+							"branch": {								
+								"devel": "master"           					
+            				},
+            				"showwebgit": "true",
+            				"token": "false",
+            				"poll": "weekly"					
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {    
+						"publishers": "false",
+						"job_view": "External"  			
+           			}
+           		},
+           		"libkolab": { 
+           			"branch_group_tracks": {           									
+						"qt4-stable":"qt4"				
+					},          		
+					"description":"Mirror of upstream libkolab",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["qt4"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/libkolab": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "https://git.kolab.org/diffusion/LK/libkolab.git"
+								}							
+							},					
+							"branch": {								
+								"qt4": "master"           					
+            				},
+            				"showwebgit": "false",
+            				"token": "false",
+            				"poll": "weekly"					
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {   
+						"publishers": "false",
+						"job_view": "External"   			
+           			}
+           		},
+           		"libkolabxml": { 
+           			"branch_group_tracks": {           									
+						"qt4-stable":"qt4"				
+					},          		
+					"description":"Mirror of upstream libkolabxml",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["qt4"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/libkolabxml": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "https://git.kolab.org/diffusion/LK/libkolabxml.git"
+								}							
+							},					
+							"branch": {								
+								"qt4": "master"           					
+            				},
+            				"showwebgit": "false",
+            				"token": "false",
+            				"poll": "weekly"					
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {  
+						"publishers": "false",
+						"job_view": "External"    			
+           			}
+           		},
+           		"libsignon-qt": { 
+           			"branch_group_tracks": {           									
+						"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"						
+					},          		
+					"description":"Mirror of upstream libsignon-qt",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":["devel"],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":["devel"],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/libsignon-qt": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "https://gitlab.com/accounts-sso/signond.git"
+								}							
+							},					
+							"branch": {								
+								"devel": "master"           					
+            				},
+            				"showwebgit": "false",
+            				"token": "false",
+            				"poll": "weekly"					
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {  
+						"publishers": "false",
+						"job_view": "External"    			
+           			}
+           		},
+           		"libssh": { 
+           			"branch_group_tracks": {           									
+						"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"						
+					},          		
+					"description":"Mirror of upstream libssh",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":["devel"],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":["devel"],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/libssh": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "git://git.libssh.org/projects/libssh.git"
+								}							
+							},					
+							"branch": {								
+								"devel": "master"           					
+            				},
+            				"showwebgit": "false",
+            				"token": "false",
+            				"poll": "weekly"					
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {  
+						"publishers": "false",
+						"job_view": "External"    			
+           			}
+           		},
+           		"libstreamanalyzer": { 
+           			"branch_group_tracks": {           									
+						"qt4-stable":"qt4"				
+					},        		
+					"description":"Mirror of upstream libstreamanalyzer",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["qt4"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/libstreamanalyzer": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "git://anongit.kde.org/libstreamanalyzer"
+								}							
+							},					
+							"branch": {								
+								"qt4": "master"           					
+            				},
+            				"showwebgit": "true",
+            				"token": "false",
+            				"poll": "weekly"					
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {   
+						"publishers": "false"  			
+           			}
+           		},
+           		"libstreams": { 
+           			"branch_group_tracks": {           									
+						"qt4-stable":"qt4"				
+					},        		
+					"description":"Mirror of upstream libstreams",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["qt4"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/libstreams": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "git://anongit.kde.org/libstreams"
+								}							
+							},					
+							"branch": {								
+								"qt4": "master"           					
+            				},
+            				"showwebgit": "true",
+            				"token": "false",
+            				"poll": "weekly"					
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {  
+						"publishers": "false",
+						"job_view": "External"    			
+           			}
+           		},
+           		"mockcpp": { 
+           			"branch_group_tracks": {           									
+						"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"						
+					},       		
+					"description":"Mirror of upstream mockcpp",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/mockcpp": {					
+							"protocol": {
+								"hg": {
+									"access": "read-only",
+									"address": "https://bitbucket.org/godsme/mockcpp"
+								}							
+							},					
+							"branch": {								
+								"devel": "master"           					
+            				},
+            				"showwebgit": "false",
+            				"token": "false",
+            				"poll": "weekly"					
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": { 
+						"publishers": "false",
+						"job_view": "External"     			
+           			}
+           		},
+           		"molequeue": { 
+           			"branch_group_tracks": {         									
+						"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"						
+					},       		
+					"description":"Mirror of upstream opencv",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/molequeue": {					
+							"protocol": {
+								"hg": {
+									"access": "read-only",
+									"address": "https://github.com/OpenChemistry/molequeue.git"
+								}							
+							},					
+							"branch": {								
+								"devel": "master"           					
+            				},
+            				"showwebgit": "false",
+            				"token": "false",
+            				"poll": "weekly"				
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": { 
+						"publishers": "false",
+						"job_view": "External"     			
+           			}
+           		},
+           		"opencv": { 
+           			"branch_group_tracks": {  
+           				"qt4-stable":"qt4",            		        									
+						"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"						
+					},       		
+					"description":"Mirror of upstream molequeue",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["qt4","devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/opencv": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "git://github.com/Itseez/opencv.git"
+								}							
+							},					
+							"branch": {								
+								"qt4": "2.4",  
+								"devel": "2.4.11"         					
+            				},
+            				"showwebgit": "false",
+            				"token": "false",
+            				"poll": "weekly"				
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {  
+						"publishers": "false",
+						"job_view": "External"    			
+           			}
+           		},
+           		"packagekit-qt": { 
+           			"branch_group_tracks": {  
+           				"qt4-stable":"devel",            		        									
+						"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"						
+					},       		
+					"description":"Mirror of upstream packagekit-qt",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/packagekit-qt": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "git://github.com/hughsie/PackageKit-Qt.git"
+								}							
+							},					
+							"branch": {								 
+								"devel": "master"         					
+            				},
+            				"showwebgit": "false",
+            				"token": "false",
+            				"poll": "weekly"				
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {   
+						"publishers": "false",
+						"job_view": "External"   			
+           			}
+           		},
+           		"polkit-qt-1": { 
+           			"branch_group_tracks": {  
+           				"qt4-stable":"devel",            		        									
+						"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"						
+					},       		
+					"description":"Mirror of upstream polkit-qt-1",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/polkit-qt-1": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "git://anongit.kde.org/polkit-qt-1"
+								}							
+							},					
+							"branch": {								 
+								"devel": "master"         					
+            				},
+            				"showwebgit": "true",
+            				"token": "false",
+            				"poll": "weekly"				
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {  
+						"publishers": "false",
+						"job_view": "External"   			
+           			}
+           		},
+           		"poppler": { 
+           			"branch_group_tracks": {  
+           				"qt4-stable":"devel",            		        									
+						"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"						
+					},       		
+					"description":"Mirror of upstream polkit-qt-1",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/poppler": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "git://git.freedesktop.org/git/poppler/poppler"
+								}							
+							},					
+							"branch": {								 
+								"devel": "master"         					
+            				},
+            				"showwebgit": "false",
+            				"token": "false",
+            				"poll": "weekly"				
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {  
+						"publishers": "false",
+						"job_view": "External"   			
+           			}
+           		},
+           		"pyqt4": { 
+           			"branch_group_tracks": {  
+           				"qt4-stable":"devel"										
+					},       		
+					"description":"Mirror of upstream pyqt4",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/pyqt4": {					
+							"protocol": {
+								"tar": {
+									"address": "http://iweb.dl.sourceforge.net/project/pyqt/PyQt4/PyQt-4.11.3/PyQt-x11-gpl-4.11.3.tar.gz"
+								}							
+							},					
+							"branch": {								 
+								"devel": "master"         					
+            				},
+            				"showwebgit": "false",
+            				"token": "false",
+            				"poll": "weekly"				
+						}
+					},				
 					"dependencies": {
 					},
 					"ci_overrides": {
-           				"logrotator":"-1,5,-1,-1",
-           				"downstream":"extra-cmake-modules",
-           				"priority": "1"
-           			},
-           			"active": "true"
-				}
-			}	
-		},
-		"KF5": {
-			"group_email": "",
-			"group_irc": "",
-			"branch_group_tracks": {
-				"kf5-qt5": "devel",
-				"kf5-qt5-patch": "devel",
-				"kf5-minimum": "minimum",
-				"kf5-qt5-stable": "devel",
-				"kf5-qt5-release": "release"
-			},
-			"frameworks/*": {
-				"devel": "master",
-            	"minimum": "master",
-            	"release": "v5.15",
-            	"patch": "master"
-            },
-            "dependencies": {
-            	"*": {
-            		"*": {
-            			"qt5/qt5": "devel",
-						"kdesupport/extra-cmake-modules" : "devel"
-					}
-            	}
-            },	
-			"projects": {
-				"attica": {
-					"description":"Attica is a Qt library that implements the Open Collaboration Services API. \n Mailing list: http://lists.freedesktop.org/mailman/listinfo/ocs  \n Internet Relay Chat: #ocs@freenode",							
+						"publishers": "false",
+						"job_view": "External"     			
+           			}
+           		},
+           		"pyqt5": { 
+           			"branch_group_tracks": {         									
+						"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"						
+					},          		
+					"description":"Mirror of upstream pyqt5",					
 					"platforms": {
     					"ubuntu": {
     						"build":"true",
     						"compilers":"gcc", 
     						"platform_email": "",
 							"platform_irc": "",
-							"tracks":["devel","minimum"],
-							"VariationLinux":[] 		
+							"tracks":["devel"],
+							"VariationLinux":[]    		
     					},
     					"android": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"android_sdk",
     						"platform_email": "",
 							"platform_irc": "",
-							"tracks":["devel"],
-							"VariationAndroid":[]     		
+							"tracks":[""],
+							"VariationAndroid":[]       		
     					},
     					"ubuntu-phone": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"ubuntu_sdk",
     						"platform_email": "",
 							"platform_irc": "",
-							"tracks":["devel"],
+							"tracks":[""],
 							"VariationUbuntuP":[]     		
     					},
     					"osx": {
@@ -370,110 +1627,71 @@
     						"compilers":"clang",
     						"platform_email": "",
 							"platform_irc": "kde-mac",
-							"tracks":["devel"],
-							"VariationOSX":[]       						
+							"tracks":[""],
+							"VariationOSX":[]         						
     					},
     					"windows": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"vs2013",
     						"platform_email": "",
 							"platform_irc": "kde-windows",
-							"tracks":["devel"],
+							"tracks":[""],
 							"VariationWindows":[]      		  				
     					} 
-    				},
+    				},	
     				"Variations":[],   		
 					"products_needed": {
-						"devel": {
-							"qt5": "devel"
-						},
-						"minimum": {
-							"qt5": "devel"
-						}
-					},			
+					},									
 					"repositories": {
-						"frameworks/attica": {					
+						"general/pyqt5": {					
 							"protocol": {
 								"git": {
 									"access": "read-only",
-									"address": "git://anongit.kde.org/qt/qt5"
-								},
-								"http": {
-									"access": "read-only",
-									"address": "http://anongit.kde.org/qt/qt5"
-								},
-								"ssh": {
-									"access": "read+write",
-									"address": "git@git.kde.org:qt/qt5"
-								},
-								"tarball": {
-									"access": "read-only",
-									"address": "http://anongit.kde.org/qt/qt5/qt5-latest.tar.gz"
-								}
-							}										
+									"address": "git://github.com/baoboa/pyqt5.git"						
+								}						
+							},					
+							"branch": {								 
+								"devel": "master"         					
+            				},
+            				"showwebgit": "false",
+            				"token": "false"           								
 						}
-					},
-					"excluded_repositories": [					
-					],
+					},				
 					"dependencies": {
 					},
-					"ci_overrides": {           				
-           				"downstream":"",
-           				"priority": 10
-           			},
-           			"active": "true"
-				}
-			}	
-		},
-		"Plasma": {
-			"group_email": "",
-			"group_irc": "",
-			"branch_group_tracks": {
-				"kf5-qt5": "devel",
-				"kf5-qt5-patch": "devel",
-				"kf5-qt5-stable": "stable",
-				"kf5-qt5-release": "stable"
-			},
-			"kde/workspace/*": {
-				"devel": "master",
-               	"stable": "v5.4.2"
-            	},
-            "dependencies": {
-            	"devel": {
-            		"qt5/qt5": "devel",
-					"kdesupport/extra-cmake-modules" : "devel"
-				},
-				"stable": {
-					"qt5/qt5": "stable",
-					"kdesupport/extra-cmake-modules" : "devel"
-				}            	
-            },	
-			"projects": {
-				"plasma-desktop": {
-					"description":"The Plasma Desktop",							
+					"ci_overrides": {  
+						"publishers": "false",
+						"job_view": "External"   			
+           			}
+           		},
+           		"qjson": { 
+           			"branch_group_tracks": {  
+           				"qt4-stable":"devel"										
+					},          		
+					"description":"Mirror of upstream qjson",					
 					"platforms": {
     					"ubuntu": {
     						"build":"true",
     						"compilers":"gcc", 
     						"platform_email": "",
 							"platform_irc": "",
-							"tracks":["devel","stable"],
-							"VariationLinux":[] 		
+							"tracks":["devel"],
+							"VariationLinux":[]    		
     					},
     					"android": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"android_sdk",
     						"platform_email": "",
 							"platform_irc": "",
-							"tracks":["devel"],
-							"VariationAndroid":[]     		
+							"tracks":[""],
+							"VariationAndroid":[]       		
     					},
     					"ubuntu-phone": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"ubuntu_sdk",
     						"platform_email": "",
 							"platform_irc": "",
-							"tracks":["devel"],
+							"tracks":[""],
 							"VariationUbuntuP":[]     		
     					},
     					"osx": {
@@ -481,79 +1699,482 @@
     						"compilers":"clang",
     						"platform_email": "",
 							"platform_irc": "kde-mac",
-							"tracks":["devel"],
-							"VariationOSX":[]       						
+							"tracks":[""],
+							"VariationOSX":[]         						
     					},
     					"windows": {
-    						"build":"true",
+    						"build":"false",
     						"compilers":"vs2013",
     						"platform_email": "",
 							"platform_irc": "kde-windows",
-							"tracks":["devel"],
+							"tracks":[""],
 							"VariationWindows":[]      		  				
     					} 
-    				},
+    				},	
     				"Variations":[],   		
 					"products_needed": {
-						"devel": {
-							"qt5": "devel"
-						},
-						"stable": {
-							"qt5": "stable"
-						}
-					},			
+					},									
 					"repositories": {
-						"kde/workspace/plasma-desktop": {					
+						"general/qjson": {					
 							"protocol": {
 								"git": {
 									"access": "read-only",
-									"address": "git://anongit.kde.org/qt/qt5"
-								},
-								"http": {
-									"access": "read-only",
-									"address": "http://anongit.kde.org/qt/qt5"
-								},
-								"ssh": {
-									"access": "read+write",
-									"address": "git@git.kde.org:qt/qt5"
-								},
-								"tarball": {
-									"access": "read-only",
-									"address": "http://anongit.kde.org/qt/qt5/qt5-latest.tar.gz"
-								}
-							}										
+									"address": "git://github.com/flavio/qjson.git"						
+								}						
+							},					
+							"branch": {								 
+								"devel": "0.8.1"         					
+            				},
+            				"showwebgit": "false",
+            				"token": "false"           								
 						}
-					},
-					"excluded_repositories": [					
-					],
+					},				
 					"dependencies": {
-						"devel": {
-							"frameworks/kdoctools" : "devel",
-							"frameworks/ki18n" : "devel",
-							"frameworks/kcmutils" : "devel",
-							"frameworks/knewstuff" : "devel",
-							"frameworks/kdelibs4support" : "devel",
-							"frameworks/knotifyconfig" : "devel",
-							"frameworks/kdesu" : "devel",
-							"frameworks/krunner" : "devel",
-							"frameworks/kwallet" : "devel",
-							"frameworks/attica" : "devel",
-							"frameworks/plasma-framework" : "devel",
-							"frameworks/kpeople" : "devel",
-							"kde/workspace/systemsettings" : "devel",
-							"kde/workspace/powerdevil" : "devel",
-							"kde/workspace/ksysguard" : "devel",
-							"kde/workspace/oxygen" : "devel"
-						}
 					},
-					"ci_overrides": {           				
-           				"downstream":"",
-           				"priority": 10
-           			},
-           			"active": "true"
-				}
-			}	
-		}						
+					"ci_overrides": {  
+						"publishers": "false",
+						"job_view": "External"   			
+           			}
+           		},
+           		"qoauth": { 
+           			"branch_group_tracks": { 
+           				"qt4-stable":"devel",	 
+           				"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"										
+					},          		
+					"description":"Mirror of upstream qjson",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/qoauth": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "https://code.google.com/p/qt-oauth-lib/"						
+								}						
+							},					
+							"branch": {								 
+								"devel": "master"         					
+            				},
+            				"showwebgit": "false",
+            				"token": "false"           								
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {  
+						"publishers": "false",
+						"job_view": "External"   			
+           			}
+           		},
+           		"shared-desktop-ontologies": { 
+           			"branch_group_tracks": { 
+           				"qt4-stable":"devel"								
+					},          		
+					"description":"Mirror of upstream shared-desktop-ontologies",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/shared-desktop-ontologies": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "git://git.code.sf.net/p/oscaf/shared-desktop-ontologies"						
+								}						
+							},					
+							"branch": {								 
+								"devel": "master"         					
+            				},
+            				"showwebgit": "false",
+            				"token": "false"           								
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {    
+						"publishers": "false",
+						"job_view": "External" 			
+           			}
+           		},
+           		"telepathy-qt4": { 
+           			"branch_group_tracks": { 
+           				"qt4-stable":"devel"								
+					},          		
+					"description":"Mirror of upstream telepathy-qt4",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/telepathy-qt4": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "git://anongit.freedesktop.org/telepathy/telepathy-qt"						
+								}						
+							},					
+							"branch": {								 
+								"devel": "master"         					
+            				},
+            				"showwebgit": "false",
+            				"token": "false"           								
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": { 
+						"publishers": "false",
+						"job_view": "External"    			
+           			}
+           		},
+           	    "telepathy-qt5": { 
+           			"branch_group_tracks": { 
+           				"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"								
+					},          		
+					"description":"Mirror of upstream telepathy-qt5",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/telepathy-qt5": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "git://anongit.freedesktop.org/telepathy/telepathy-qt"						
+								}						
+							},					
+							"branch": {								 
+								"devel": "master"         					
+            				},
+            				"showwebgit": "false",
+            				"token": "false"           								
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": {  
+						"publishers": "false",
+						"job_view": "External"   			
+           			}
+           		},
+           	    "vc": { 
+           			"branch_group_tracks": {
+           			    "qt4-stable":"devel", 
+           				"kf5-qt5": "devel",											
+						"kf5-qt5-stable": "devel"								
+					},          		
+					"description":"Mirror of upstream vc",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/vc": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "git://gitorious.org/vc/vc.git"						
+								}						
+							},					
+							"branch": {								 
+								"devel": "0.7.4"         					
+            				},
+            				"showwebgit": "false",
+            				"token": "false"           								
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": { 
+						"publishers": "false",
+						"job_view": "External"    			
+           			}
+           		},
+           		"flabuffers": { 
+           			"branch_group_tracks": {          			    
+           				"kf5-qt5": "devel"														
+					},          		
+					"description":"Mirror of upstream flatbuffers",					
+					"platforms": {
+    					"ubuntu": {
+    						"build":"true",
+    						"compilers":"gcc", 
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":["devel"],
+							"VariationLinux":[]    		
+    					},
+    					"android": {
+    						"build":"false",
+    						"compilers":"android_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationAndroid":[]       		
+    					},
+    					"ubuntu-phone": {
+    						"build":"false",
+    						"compilers":"ubuntu_sdk",
+    						"platform_email": "",
+							"platform_irc": "",
+							"tracks":[""],
+							"VariationUbuntuP":[]     		
+    					},
+    					"osx": {
+    						"build":"false",
+    						"compilers":"clang",
+    						"platform_email": "",
+							"platform_irc": "kde-mac",
+							"tracks":[""],
+							"VariationOSX":[]         						
+    					},
+    					"windows": {
+    						"build":"false",
+    						"compilers":"vs2013",
+    						"platform_email": "",
+							"platform_irc": "kde-windows",
+							"tracks":[""],
+							"VariationWindows":[]      		  				
+    					} 
+    				},	
+    				"Variations":[],   		
+					"products_needed": {
+					},									
+					"repositories": {
+						"general/vc": {					
+							"protocol": {
+								"git": {
+									"access": "read-only",
+									"address": "https://github.com/google/flatbuffers"						
+								}						
+							},					
+							"branch": {								 
+								"devel": "master"         					
+            				},
+            				"showwebgit": "false",
+            				"token": "false"           								
+						}
+					},				
+					"dependencies": {
+					},
+					"ci_overrides": { 
+						"publishers": "false", 
+						"job_view": "External"  			
+           			}
+           		}
+           }          		
+		}
 	}
 }
 ]
