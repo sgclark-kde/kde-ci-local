@@ -144,23 +144,23 @@ groupData.each { groups ->
 							}
 						}
 						// How often to automatically build job, set to empty by default as the git commit triggers need it.
-						/*triggers {
+						triggers {
 							scm('')
-						}*/
+						}
 						//Wrappers
-						/*wrappers {
+						wrappers {
 							timestamps()							
 							colorizeOutput()
 							environmentVariables {
 								env('JENKINS_SLAVE_HOME', '/home/jenkins/scripts')
 								env('ASAN_OPTIONS', 'detect_leaks=0')
 							}
-						}8?
+						}
 						//Run the parent on master
-						/*configure { project ->
+						configure { project ->
 							project / assignedNode <<  'master'
 							project / canRoam <<	 false
-						}*/
+						}
 						
 						//Create matrix for each platform
 						//configure platformClosure
