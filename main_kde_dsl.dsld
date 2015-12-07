@@ -106,7 +106,7 @@ groupData.each { groups ->
 					matrixJob("${jobname} ${branch} ${track.key} ${view}".replaceAll('/','-')) {
 						configure { project ->
 							project / 'actions' {}
-							if(view != "External") {
+							if(view != 'External') {
 								project << authToken("PNcTKQORJW653QKVTwL0GV64OZA-${jobname}")
 							}
 						}
@@ -120,7 +120,7 @@ groupData.each { groups ->
 						}
 						customWorkspace('${HOME}' + '/' + "${jobname}" + '/' + "${track.value}")
 						
-						//childCustomWorkspace(".")
+						childCustomWorkspace(".")
 								
 
 						// throttle jobs TO-DO: make this configurable
