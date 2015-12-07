@@ -185,7 +185,7 @@ groupData.each { groups ->
 
 					/* Create the actual build steps */
 					//configure conditionalbyCombinations('Linux', new_platform.platformCompilers, jobname, branchGroup)
-					configure createPublishers(new_platform.publishers, jobname, new_platform.platformCompilers)		
+					//configure createPublishers(new_platform.publishers, jobname, new_platform.platformCompilers)		
 				
 					}catch(Throwable e){}			
 			}	
