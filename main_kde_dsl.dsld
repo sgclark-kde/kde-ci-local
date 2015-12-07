@@ -170,12 +170,12 @@ groupData.each { groups ->
 						
 						configure compilerClosure
 						// We only need to create this matrix if the job has variations
-						configure variationClosure
+						//configure variationClosure
 						// Generate buildsteps.
-						configure new_platform.initialPlatformBlock(new_platform.PlatformToCompiler)
-						configure new_platform.GenerateSCM(CIOptions.repo_data, track.value)	
+						//configure new_platform.initialPlatformBlock(new_platform.PlatformToCompiler)
+						//configure new_platform.GenerateSCM(CIOptions.repo_data, track.value)	
 				
-						analysisCollector()
+						//analysisCollector()
 				
 						//configure createEmailNotifications(jobname, new_platform.email)
 						//configure createIRCNotifications(new_platform.irc)
