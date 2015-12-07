@@ -78,11 +78,12 @@ groupData.each { groups ->
 			}		
 			println "The following platforms are scheduled to build for " + jobname + " " \
 				+ track.value + ": " + new_platform.platformsToBuild		
-				println new_platform.PlatformToCompiler
+				
 			//Set CI variables
 			CIVars = new CIOptions(jobname, currentProject.description, currentProject.combinations, currentProject.downstream, currentProject.logrotator, \
 				currentProject.priority, currentProject.email, currentProject.irc, currentProject.html5, currentProject.cron, currentProject.publishers, currentProject.job_view)
 			view = CIVars.view
+			println view
 			//Set some DSL variables defined in the kde_projects.json			
 			def (daysToKeep, numToKeep, artifactDaysToKeep, artifactNumToKeep) = CIVars.logrotator.tokenize( ',' )
 			ArrayList Variation = new_platform.Variation ?: null
@@ -105,16 +106,18 @@ groupData.each { groups ->
 					matrixJob("${jobname} ${branch} ${track.key} ${view}".replaceAll('/','-')) {
 						configure { project ->
 							project / 'actions' {}
-							project << authToken("PNcTKQORJW653QKVTwL0GV64OZA-${jobname}")
+							if(view != "External") {
+								project << authToken("PNcTKQORJW653QKVTwL0GV64OZA-${jobname}")
+							}
 						}
 						description "${CIVars.description}\n ${branch} build for ${jobname}"		
 						// limit job cache (Can be overridden)
 						logRotator(daysToKeep.toInteger(), numToKeep.toInteger(), artifactDaysToKeep.toInteger(), artifactNumToKeep.toInteger())
-						/*configure { project ->
+						configure { project ->
 							project / 'properties' / 'org.jenkins.ci.plugins.html5__notifier.JobPropertyImpl' {
 								skip CIVars.html5 
 							}
-						}*/
+						}
 						customWorkspace('${HOME}' + '/' + "${jobname}" + '/' + "${track.value}")
 						
 						//childCustomWorkspace(".")
