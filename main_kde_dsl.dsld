@@ -163,29 +163,29 @@ groupData.each { groups ->
 						}
 						
 						//Create matrix for each platform
-						//configure platformClosure
-						//touchStoneFilter( 'PLATFORM=="Linux"' )
+						configure platformClosure
+						touchStoneFilter( 'PLATFORM=="Linux"' )
 											
 						//combinationFilter('(PLATFORM=="Linux" && compiler=="gcc")')					
 						
-						//configure compilerClosure
+						configure compilerClosure
 						// We only need to create this matrix if the job has variations
-						//configure variationClosure
+						configure variationClosure
 						// Generate buildsteps.
-						//configure new_platform.initialPlatformBlock(new_platform.PlatformToCompiler)
-						//configure new_platform.GenerateSCM(CIOptions.repo_data, track.value)	
+						configure new_platform.initialPlatformBlock(new_platform.PlatformToCompiler)
+						configure new_platform.GenerateSCM(CIOptions.repo_data, track.value)	
 				
-						//analysisCollector()
+						analysisCollector()
 				
-						//configure createEmailNotifications(jobname, new_platform.email)
-						//configure createIRCNotifications(new_platform.irc)
+						configure createEmailNotifications(jobname, new_platform.email)
+						configure createIRCNotifications(new_platform.irc)
 				
 			
 					}
 
 					/* Create the actual build steps */
-					//configure conditionalbyCombinations('Linux', new_platform.platformCompilers, jobname, branchGroup)
-					//configure createPublishers(new_platform.publishers, jobname, new_platform.platformCompilers)		
+					configure conditionalbyCombinations('Linux', new_platform.platformCompilers, jobname, branchGroup)
+					configure createPublishers(new_platform.publishers, jobname, new_platform.platformCompilers)		
 				
 					}catch(Throwable e){}			
 			}	
@@ -215,4 +215,51 @@ listView('External') {
         lastDuration()
         buildButton()
     }
+}
+
+listView('External') {
+	description('All jobs for ' + view)
+	filterBuildQueue()
+	filterExecutors()
+	jobs {
+		name(jobname)
+		regex("*. default")
+	}
+//    jobFilters {
+//        status {
+//            status('')
+//        }
+//    }
+	columns {
+		status()
+		weather()
+		name()
+		lastSuccess()
+		lastFailure()
+		lastDuration()
+		buildButton()
+	}
+}
+listView('External') {
+	description('All jobs for ' + view)
+	filterBuildQueue()
+	filterExecutors()
+	jobs {
+		name(jobname)
+		regex("*. kf5-qt5")
+	}
+//    jobFilters {
+//        status {
+//            status('')
+//        }
+//    }
+	columns {
+		status()
+		weather()
+		name()
+		lastSuccess()
+		lastFailure()
+		lastDuration()
+		buildButton()
+	}
 }
