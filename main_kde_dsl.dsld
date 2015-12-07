@@ -107,7 +107,7 @@ groupData.each { groups ->
 							project / 'actions' {}
 							project << authToken("PNcTKQORJW653QKVTwL0GV64OZA-${jobname}")
 						}
-						//description "${CIVars.description}\n ${branch} build for ${jobname}"		
+						description "${CIVars.description}\n ${branch} build for ${jobname}"		
 						// limit job cache (Can be overridden)
 						logRotator(daysToKeep.toInteger(), numToKeep.toInteger(), artifactDaysToKeep.toInteger(), artifactNumToKeep.toInteger())
 						/*configure { project ->
@@ -193,8 +193,9 @@ listView('External') {
     description('All jobs for ' + view)
     filterBuildQueue()
     filterExecutors()
-    jobs {        
-        regex("*.External")
+    jobs { 
+		name(jobname)       
+        regex("*. External")
     }
 //    jobFilters {
 //        status {
