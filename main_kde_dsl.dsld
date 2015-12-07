@@ -135,14 +135,14 @@ groupData.each { groups ->
 							}
 						}
 						
-						/*if (branchGroup =~ "qt4") {
+						if (branchGroup =~ "qt4") {
 							configure { project ->
 								project.name = 'matrix-project'
 								project / 'properties' << 'jp.ikedam.jenkins.plugins.groovy_label_assignment.GroovyLabelAssignmentProperty' {
 									groovyScript 'def labelMap = [ Linux: "QT4"]; return labelMap.get(binding.getVariables().get("PLATFORM"));'
 								}
 							}
-						}*/
+						}
 						// How often to automatically build job, set to empty by default as the git commit triggers need it.
 						/*triggers {
 							scm('')
