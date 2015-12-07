@@ -57,7 +57,8 @@
 		"matrix-groovy-execution-strategy",
 		"simple-theme-plugin",
 		"dockerhub-notification",
-		"docker-build-publish"  
+		"docker-build-publish",
+		"envinject"  
 	]
 }
 ]
