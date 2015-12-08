@@ -111,9 +111,9 @@ class Platform {
 			this.path = path.key			
 			def protocol = path.value.find { key, value -> key == 'protocol' }
 			
-			def address = protocol.find { key, value -> key == 'address' }
-			this.branch = path.branch."${protocol}".find { key, value -> key == track }
-			boolean showbrowser = path.showbrowser.value()		
+			def address = protocol.value.find { key, value -> key == 'address' }
+			this.branch = path.value.find { key, value -> key == track }
+			boolean showbrowser = path.value.find { key, value -> key == 'showbrowser' }	
 			switch(protocol) {
 				case 'svn':
 					return { project ->
