@@ -173,7 +173,7 @@ groupData.each { groups ->
 						configure variationClosure
 						// Generate buildsteps.
 						configure new_platform.initialPlatformBlock(new_platform.PlatformToCompiler)
-						//configure new_platform.GenerateSCM(CIOptions.repo_data, track.value)	
+						configure new_platform.GenerateSCM(CIOptions.repo_data, track.value)	
 				
 						//analysisCollector()
 				
@@ -197,8 +197,7 @@ listView('External') {
     description('All jobs for ' + view)
     filterBuildQueue()
     filterExecutors()
-    jobs { 
-		name(jobname)       
+    jobs { 		      
         regex("*. External")
     }
 //    jobFilters {
@@ -221,8 +220,7 @@ listView('default') {
 	description('All jobs for ' + view)
 	filterBuildQueue()
 	filterExecutors()
-	jobs {
-		name(jobname)
+	jobs {		
 		regex("*. default")
 	}
 //    jobFilters {
@@ -244,8 +242,7 @@ listView('kf5-qt5') {
 	description('All jobs for ' + view)
 	filterBuildQueue()
 	filterExecutors()
-	jobs {
-		name(jobname)
+	jobs {		
 		regex("*. kf5-qt5")
 	}
 //    jobFilters {
