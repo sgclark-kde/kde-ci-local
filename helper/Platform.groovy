@@ -107,33 +107,34 @@ class Platform {
 		}
 		
 	}
-	def GenerateSCM(repo, track) {		
-		Map repoinfo = repo.find { key, value -> key == 'protocol' }
-		def protocol = repo.key
-		def address = protocol.find { key, value -> key == 'address' }
-		this.branch = repo.branch."${protocol}".find { key, value -> key == track }
-		boolean showbrowser = repo.showbrowser.value()		
-		switch(protocol) {
-			case 'svn':
-				return { project ->
-					project / scm(class: 'hudson.scm.SubversionSCM') {
-						locations {
-							'hudson.scm.SubversionSCM_-ModuleLocation' {
-								remote address
-								local '.'
+	def GenerateSCM(repo, track) {	
+		this.repo.each { path ->
+			Map repoinfo = repo.find { key, value -> key == 'protocol' }
+			def protocol = path.protocol.key
+			def address = protocol.find { key, value -> key == 'address' }
+			this.branch = repo.branch."${protocol}".find { key, value -> key == track }
+			boolean showbrowser = repo.showbrowser.value()		
+			switch(protocol) {
+				case 'svn':
+					return { project ->
+						project / scm(class: 'hudson.scm.SubversionSCM') {
+							locations {
+								'hudson.scm.SubversionSCM_-ModuleLocation' {
+									remote address
+									local '.'
+								}
 							}
-						}
-						excludedRegions ''
-						includedRegions ''
-						excludedUsers ''
-						excludedRevprop ''
-						excludedCommitMessages ''
-						workspaceUpdater(class: "hudson.scm.subversion.UpdateUpdater")	
-					}				
-				}
-				break
-			case 'git':
-				return { project ->
+							excludedRegions ''
+							includedRegions ''
+							excludedUsers ''
+							excludedRevprop ''
+							excludedCommitMessages ''
+							workspaceUpdater(class: "hudson.scm.subversion.UpdateUpdater")	
+						}				
+					}
+					break
+				case 'git':
+					return { project ->
 					project.name = 'matrix-project'
 					project / scm(class: 'hudson.plugins.git.GitSCM') {
 						userRemoteConfigs {
@@ -218,6 +219,7 @@ class Platform {
 					}
 				}
 				break
+			}
 		}		
 	}
 	def BuildTriggers(repo, track, jobname) {

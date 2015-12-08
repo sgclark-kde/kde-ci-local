@@ -97,6 +97,7 @@ groupData.each { groups ->
 				
 				//retrieve repository information and path
 				new_platform.RepoData = [:] << currentProject.getAt("repositories")
+				println new_platform.RepoData
 				def SCMClosure = new_platform.GenerateSCM(new_platform.RepoData, track.value)
 				/* BEGIN DSL CODE */
 				try{
