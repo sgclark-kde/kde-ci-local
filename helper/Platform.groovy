@@ -109,9 +109,9 @@ class Platform {
 	def GenerateSCM(track) {	
 		this.RepoData.each { path ->
 			this.path = path.key			
-			def protocol = [:] << path.value.getAt { 'protocol' }
-			this.branch = [:] << path.value.getAt { 'branch' }
-			def address = [:] << protocol.getAt { 'address' }
+			def protocol = [:] << path.value.getAt("protocol")
+			this.branch = [:] << path.value.getAt("branch")
+			def address = [:] << protocol.getAt("address")
 			def currbranch = path.value.find { key, value -> key == track }
 			boolean showbrowser = path.value.find { key, value -> key == 'showbrowser' }	
 			switch(protocol.key) {
