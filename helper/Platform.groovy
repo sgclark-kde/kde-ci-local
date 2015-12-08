@@ -59,9 +59,13 @@ class Platform {
 		this.RepoData = [:] << repositories
 		this.RepoData.each { path ->			
 			this.path = path.key
-			this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
+			path.protocol.each { protocol ->
+				this.protocol = protocol.key
+				this.address = protocol.address.value
+			//this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
 			this.branch = [:] << path.value.find { key, value -> key == 'branch' }			
 			this.showbrowser = path.value.find { key, value -> key == 'showbrowser' }
+			}
 		}
 		
 	}
@@ -120,9 +124,8 @@ class Platform {
 	}
 	def GenerateSCM(jobname, track) {
 		def currbranch = this.branch.find { key, value -> key == track }
-		this.protocol.each { protocol ->
-			this.address = protocol.address.value
-			switch(protocol) {
+		
+			switch(this.protocol) {
 				case 'svn':
 					return { project ->
 						project / scm(class: 'hudson.scm.SubversionSCM') {
@@ -229,7 +232,7 @@ class Platform {
 					break
 				}
 			}		
-		}
+		
 	def BuildTriggers(repo, track, jobname) {
 		
 		def tokenid =  "PNcTKQORJW653QKVTwL0GV64OZA-${jobname}"
