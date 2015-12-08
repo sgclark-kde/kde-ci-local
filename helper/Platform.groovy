@@ -122,7 +122,7 @@ class Platform {
 		
 	}
 	def GenerateSCM(jobname, track) {
-		def currbranch = this.branch.value.getAt(track)		
+		def currbranch = this.branch.getAt(track)		
 			switch(this.protocol) {
 				case 'svn':
 					return { project ->
