@@ -113,9 +113,9 @@ class Platform {
 			println path.value			
 			this.path = path.key			
 			this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
-			this.branch = [:] << path.value.getAt("branch")
-			def address = [:] << path.value.getAt("address")
-			def currbranch = path.value.find { key, value -> key == track }
+			this.branch = [:] << path.value.find { key, value -> key == 'branch' }
+			def address = [:] << protocol.value.find { key, value -> key == 'address' }
+			def currbranch = branch.value.find { key, value -> key == track }
 			boolean showbrowser = path.value.find { key, value -> key == 'showbrowser' }	
 			switch(protocol.key) {
 				case 'svn':
