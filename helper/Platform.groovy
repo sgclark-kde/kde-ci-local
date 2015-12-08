@@ -106,8 +106,11 @@ class Platform {
 		}
 		
 	}
-	def GenerateSCM(track) {	
+	def GenerateSCM(currentProject, track) {
+		this.RepoData = [:] << currentProject.getAt("repositories")
 		this.RepoData.each { path ->
+			println path.key
+			println path.value			
 			this.path = path.key			
 			def protocol = [:] << path.value.getAt("protocol")
 			this.branch = [:] << path.value.getAt("branch")

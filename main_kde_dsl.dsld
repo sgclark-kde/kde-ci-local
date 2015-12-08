@@ -94,17 +94,8 @@ groupData.each { groups ->
 				
 				//TO-DO Variations..
 				
-				//retrieve repository information and path
-				new_platform.RepoData = [:] << currentProject.getAt("repositories")
-				new_platform.RepoData.each { path ->
-					println path.key
-					println path.value
-					path.each { protocol ->
-						println protocol
-						
-					}
-				}
-				def SCMClosure = new_platform.GenerateSCM(track.value)
+				//retrieve repository information and path				
+				def SCMClosure = new_platform.GenerateSCM(currentProject, track.value)
 				/* BEGIN DSL CODE */
 				try{
 					matrixJob("${jobname} ${branch} ${track.key} ${view}".replaceAll('/','-')) {
