@@ -13,6 +13,7 @@ import helper.CIOptions
 import helper.Platform
 import helper.GenerateMatrixDSL
 import helper.GenerateNotifications
+import helper.GeneratePublishers
 
 def allJsonMap = parse_kde_projects_json("${HOME}")
 assert allJsonMap instanceof Map
@@ -185,9 +186,11 @@ groupData.each { groups ->
 					}
 
 					/* Create the actual build steps */
-					configure conditionalbyCombinations('Linux', new_platform.platformCompilers, jobname, track.key)
-					configure createPublishers(new_platform.publishers, jobname, new_platform.platformCompilers)		
-				
+					//configure conditionalbyCombinations('Linux', new_platform.platformCompilers, jobname, track.key)
+					publisherdsl = new GeneratePublishers()
+					new_platform.platformCompilers.each { compiler ->
+						configure publisherdsl.FlexiblePublish(CIVars.publishers, compiler)		
+					}
 					}catch(Throwable e){}			
 			}	
 			
