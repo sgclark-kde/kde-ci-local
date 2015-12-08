@@ -103,7 +103,7 @@ groupData.each { groups ->
 				
 				/* BEGIN DSL CODE */
 				try{
-					matrixJob("${jobname} ${new_platform.branch} ${track.key} ${view}").replaceAll('/','-') {
+					matrixJob("${jobname} ${new_platform.currbranch} ${track.key} ${view}").replaceAll('/','-') {
 						configure { project ->
 							project / 'actions' {}
 							project << authToken("PNcTKQORJW653QKVTwL0GV64OZA-${jobname}")
@@ -111,7 +111,7 @@ groupData.each { groups ->
 								println view  + jobname
 							}
 						}
-						description "${CIVars.description}\n ${new_platform.branch} build for ${jobname}"		
+						description "${CIVars.description}\n ${new_platform.currbranch} build for ${jobname}"		
 						// limit job cache (Can be overridden)
 						logRotator(daysToKeep.toInteger(), numToKeep.toInteger(), artifactDaysToKeep.toInteger(), artifactNumToKeep.toInteger())
 						configure { project ->
