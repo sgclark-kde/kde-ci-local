@@ -121,7 +121,8 @@ class Platform {
 		}
 		
 	}
-	def GenerateSCM(jobname, track) {		
+	def GenerateSCM(jobname, track) {
+		this.branch = this.branch.getAt(track)		
 			switch(this.protocol) {
 				case 'svn':
 					return { project ->
