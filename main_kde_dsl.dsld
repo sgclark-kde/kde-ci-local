@@ -96,11 +96,7 @@ groupData.each { groups ->
 				
 				//retrieve repository information and path
 				new_platform.RepoData = [:] << currentProject.getAt("repositories")
-				
-				def branch = CIVars.branches.getAt(track.value)				
-				assert branch != null : "The following platforms are scheduled to build for " + jobname + " " \
-				+ track.value + ": " + new_platform.platformsToBuild + " but no repository has been configured!!!"			
-				
+								
 				/* BEGIN DSL CODE */
 				try{
 					matrixJob("${jobname} ${branch} ${track.key} ${view}".replaceAll('/','-')) {
