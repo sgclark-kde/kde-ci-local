@@ -15,7 +15,7 @@ import org.jenkinsci.*
 class Platform {
 	static Map PlatformToCompiler = [:]
 	static Map RepoData = [:]
-	static Map protocol = [:]
+	String protocol
 	static List platformCompilers = []
 	static List platformsToBuild = []
 	String platform	
@@ -62,9 +62,9 @@ class Platform {
 			this.RepoData = [:] << path.value
 			this.branch = RepoData.branch.value	
 			//this.showbrowser = RepoData.showbrowser.value
-			this.RepoData.protocol.each { protocol ->
-				this.address = "Fuck you"
-				this.protocol = protocol.key
+			this.RepoData.protocol.each { protocolinfo ->
+				this.address = protocolinfo.find("address").value
+				this.protocol = protocolinfo.key
 			}
 		}	
 	}
