@@ -97,7 +97,7 @@ groupData.each { groups ->
 				//retrieve repository information and path
 				new_platform.RepoData = [:] << currentProject.getAt("repositories")
 				new_platform.RepoData.each { path ->
-					println path
+					println path.key
 					path.each { protocol ->
 						println protocol
 						
