@@ -175,10 +175,10 @@ groupData.each { groups ->
 						configure new_platform.initialPlatformBlock(new_platform.PlatformToCompiler)
 						configure SCMClosure	
 				
-						//analysisCollector()
+						analysisCollector()
 				
-						//configure createEmailNotifications(jobname, new_platform.email)
-						//configure createIRCNotifications(new_platform.irc)
+						configure createEmailNotifications(jobname, new_platform.email)
+						configure createIRCNotifications(new_platform.irc)
 				
 			
 					}
