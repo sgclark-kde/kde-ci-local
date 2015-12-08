@@ -26,8 +26,10 @@ class Platform {
 	String platform_email
 	String platform_irc
 	String branch
+	String address
 	ArrayList tracks
 	String path
+	String tarname
 	Map combinations
 	ArrayList Variation
 	ArrayList VariationLinux
@@ -39,13 +41,14 @@ class Platform {
 	Platform() {		
 	}	
 	Platform(String platform, boolean build, String compilers, String platform_email, String platform_irc, \
-		ArrayList tracks, ArrayList VariationLinux, ArrayList VariationWindows, ArrayList VariationOSX, \
+		ArrayList repositories, ArrayList tracks, ArrayList VariationLinux, ArrayList VariationWindows, ArrayList VariationOSX, \
 		ArrayList VariationAndroid, ArrayList VariationUbuntuP) {
 		this.platform = platform
 		this.build = build
 		this.compilers = compilers
 		this.platform_email	= platform_email
 		this.platform_irc = platform_irc
+		this.repositories = repositories
 		this.tracks = tracks		
 		this.Variation = Variation
 		this.VariationLinux = VariationLinux
@@ -53,13 +56,25 @@ class Platform {
 		this.VariationOSX = VariationOSX
 		this.VariationAndroid = VariationAndroid
 		this.VariationUbuntuP = VariationUbuntuP
+		this.RepoData = [:] << this.repositories
+		this.RepoData.each { path ->
+			println path.key
+			println path.value
+			this.path = path.key
+			this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
+			this.branch = [:] << path.value.find { key, value -> key == 'branch' }
+			this.address = [:] << protocol.value.find { key, value -> key == 'address' }			
+			boolean showbrowser = path.value.find { key, value -> key == 'showbrowser' }
+		}
+		
 	}
 	def addPlatform(String key, String compiler, String track) {			
 		if(this.build != false && this.tracks.contains(track)) {			
 			this.platformsToBuild << key
 			this.platformCompilers << compiler				
 		}
-		this.PlatformToCompiler << ["${key}" : ' ' + compiler]		
+		this.PlatformToCompiler << ["${key}" : ' ' + compiler]
+		
 	}
 	def newTrack()	{		
 		platformCompilers = []		
@@ -106,60 +121,51 @@ class Platform {
 		}
 		
 	}
-	def GenerateSCM(currentProject, track) {
-		this.RepoData = [:] << currentProject.getAt("repositories")
-		this.RepoData.each { path ->
-			println path.key
-			println path.value			
-			this.path = path.key			
-			this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
-			this.branch = [:] << path.value.find { key, value -> key == 'branch' }
-			//def address = [:] << protocol.value.find { key, value -> key == 'address' }
-			def currbranch = branch.value.find { key, value -> key == track }
-			boolean showbrowser = path.value.find { key, value -> key == 'showbrowser' }	
-			switch(protocol.key) {
-				case 'svn':
-					return { project ->
-						project / scm(class: 'hudson.scm.SubversionSCM') {
-							locations {
-								'hudson.scm.SubversionSCM_-ModuleLocation' {
-									remote address
-									local '.'
-								}
+	def GenerateSCM(jobname, track) {
+		def currbranch = this.branch.value.find { key, value -> key == track }
+		switch(this.protocol) {
+			case 'svn':
+				return { project ->
+					project / scm(class: 'hudson.scm.SubversionSCM') {
+						locations {
+							'hudson.scm.SubversionSCM_-ModuleLocation' {
+								remote this.address
+								local '.'
 							}
-							excludedRegions ''
-							includedRegions ''
-							excludedUsers ''
-							excludedRevprop ''
-							excludedCommitMessages ''
-							workspaceUpdater(class: "hudson.scm.subversion.UpdateUpdater")	
-						}				
+						}
+						excludedRegions ''
+						includedRegions ''
+						excludedUsers ''
+						excludedRevprop ''
+						excludedCommitMessages ''
+						workspaceUpdater(class: "hudson.scm.subversion.UpdateUpdater")	
+					}				
+				}
+				break
+			case 'git':
+				return { project ->
+				project.name = 'matrix-project'
+				project / scm(class: 'hudson.plugins.git.GitSCM') {
+					userRemoteConfigs {
+						'hudson.plugins.git.UserRemoteConfig' {
+							url this.address
+						}
 					}
-					break
-				case 'git':
-					return { project ->
-					project.name = 'matrix-project'
-					project / scm(class: 'hudson.plugins.git.GitSCM') {
-						userRemoteConfigs {
-							'hudson.plugins.git.UserRemoteConfig' {
-								url address
-							}
+					relativeTargetDir '${WORKSPACE}'
+					branches {
+						'hudson.plugins.git.BranchSpec' {
+							name currbranch
 						}
-						relativeTargetDir '${WORKSPACE}'
-						branches {
-							'hudson.plugins.git.BranchSpec' {
-								name currbranch
-							}
+					}
+					if (showbrowser)	{
+						browser(class: 'hudson.plugins.git.browser.GitWeb') {
+							url 'https://quickgit.kde.org/?p=' + jobname + '.git'
 						}
-						if (showbrowser)	{
-							browser(class: 'hudson.plugins.git.browser.GitWeb') {
-								url 'https://quickgit.kde.org/?p=' + jobname + '.git'
-							}
-						}
-						extensions {
-							'hudson.plugins.git.extensions.impl.CloneOption' {
-								shallow false
-								timeout '20'
+					}
+					extensions {
+						'hudson.plugins.git.extensions.impl.CloneOption' {
+							shallow false
+							timeout '20'
 							}
 						}
 					}
@@ -169,7 +175,7 @@ class Platform {
 				return { project ->
 					project.name = 'matrix-project'
 					project / scm(class: 'hudson.plugins.bazaar.BazaarSCM') {
-						source address
+						source this.address
 						cleantree false
 						checkout true
 						}
@@ -179,7 +185,7 @@ class Platform {
 				 return { project ->
 					project.name = 'matrix-project'
 					project / scm(class: 'hudson.plugins.mercurial.MercurialSCM') {
-						source address
+						source this.address
 						modules ''
 						revisionType BRANCH
 						revision 'default'
@@ -193,9 +199,9 @@ class Platform {
 				return { project ->
 					project.name = 'matrix-project'
 					buildStep(class: 'hudson.tasks.' + "${this.shell}") {
-						command "wget " + address + " \n" \
-								+ "tar --strip-components=1 -xf PyQt-x11-gpl-4.11.3.tar.gz \n" \
-								+ "rm PyQt-x11-gpl-4.11.3.tar.gz"
+						command "wget " + this.address + " \n" \
+								+ "tar --strip-components=1 -xf" + this.tarname + "\n" \
+								+ "rm " + this.tarname
 					}
 				}
 			default:			
@@ -204,7 +210,7 @@ class Platform {
 					project / scm(class: 'hudson.plugins.git.GitSCM') {
 						userRemoteConfigs {
 							'hudson.plugins.git.UserRemoteConfig' {
-								url address
+								url this.address
 							}
 						}
 						relativeTargetDir '${WORKSPACE}'
@@ -224,9 +230,9 @@ class Platform {
 				break
 			}
 		}		
-	}
+	
 	def BuildTriggers(repo, track, jobname) {
-		boolean token = repo.token.value()		
+		
 		def tokenid =  "PNcTKQORJW653QKVTwL0GV64OZA-${jobname}"
 		if(token) {
 			return { project ->
