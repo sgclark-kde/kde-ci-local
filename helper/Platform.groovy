@@ -38,15 +38,14 @@ class Platform {
 	Platform() {		
 	}	
 	Platform(String platform, boolean build, String compilers, String platform_email, String platform_irc, \
-		ArrayList tracks, ArrayList repo, ArrayList VariationLinux, ArrayList VariationWindows, ArrayList VariationOSX, \
+		ArrayList tracks, ArrayList VariationLinux, ArrayList VariationWindows, ArrayList VariationOSX, \
 		ArrayList VariationAndroid, ArrayList VariationUbuntuP) {
 		this.platform = platform
 		this.build = build
 		this.compilers = compilers
 		this.platform_email	= platform_email
 		this.platform_irc = platform_irc
-		this.tracks = tracks
-		this.repo = repo
+		this.tracks = tracks		
 		this.Variation = Variation
 		this.VariationLinux = VariationLinux
 		this.VariationWindows = VariationWindows

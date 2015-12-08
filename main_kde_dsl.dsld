@@ -64,7 +64,7 @@ groupData.each { groups ->
 				platform_data = [:] << platform.value
 				// bring in the values from json to the class								
 				new_platform = new Platform(platform.key, platform_data.build.toBoolean(), platform_data.compilers, \
-					platform_data.platform_email, platform_data.platform_irc, platform_data.tracks, platform_data.repositories, platform_data.VariationLinux, \
+					platform_data.platform_email, platform_data.platform_irc, platform_data.tracks, platform_data.VariationLinux, \
 				platform_data.VariationWindows, platform_data.VariationOSX, platform_data.VariationAndroid, platform_data.VariationUbuntuP)	
 				// Run the check	
 						
