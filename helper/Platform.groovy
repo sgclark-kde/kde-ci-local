@@ -25,7 +25,7 @@ class Platform {
 	String compilers
 	String platform_email
 	String platform_irc
-	String branch
+	static Map branch
 	String address
 	ArrayList tracks
 	String path
@@ -60,7 +60,7 @@ class Platform {
 		this.RepoData.each { path ->			
 			this.path = path.key			
 			this.RepoData = [:] << path.value
-			this.branch = RepoData.branch.value	
+			this.branch = [:] << RepoData.branch.value	
 			this.showbrowser = RepoData.showwebgit.value
 			this.RepoData.protocol.each { protocolinfo ->
 				this.address = protocolinfo.value.getAt("address")
