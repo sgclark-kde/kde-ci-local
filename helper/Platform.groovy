@@ -121,10 +121,8 @@ class Platform {
 		}
 		
 	}
-	def GenerateSCM(jobname, track) {
-		def currbranch = this.branch.find { key, value -> key == track }
-		
-			switch(this.protocol.key) {
+	def GenerateSCM(jobname, track) {		
+			switch(this.protocol) {
 				case 'svn':
 					return { project ->
 						project / scm(class: 'hudson.scm.SubversionSCM') {
@@ -155,7 +153,7 @@ class Platform {
 							relativeTargetDir '${WORKSPACE}'
 							branches {
 								'hudson.plugins.git.BranchSpec' {
-									name currbranch
+									name this.branch
 								}
 							}
 							if (showbrowser)	{
@@ -217,7 +215,7 @@ class Platform {
 							relativeTargetDir '${WORKSPACE}'
 							branches {
 								'hudson.plugins.git.BranchSpec' {
-									name currbranch
+									name this.branch
 								}
 							}					
 							extensions {
