@@ -58,7 +58,7 @@ class Platform {
 		this.RepoData = [:] << repositories
 		this.RepoData.each { path ->			
 			this.path = path.key
-			//this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
+			this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
 			//this.branch = [:] << path.value.find { key, value -> key == 'branch' }
 			//this.address = [:] << path.value.find { key, value -> key == 'address' }			
 			//boolean showbrowser = path.value.find { key, value -> key == 'showbrowser' }
