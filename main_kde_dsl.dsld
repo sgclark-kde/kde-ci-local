@@ -179,14 +179,14 @@ groupData.each { groups ->
 						//analysisCollector()
 				
 						//configure createEmailNotifications(jobname, new_platform.email)
-						configure createIRCNotifications(new_platform.irc)
+						//configure createIRCNotifications(new_platform.irc)
 				
 			
 					}
 
 					/* Create the actual build steps */
-					//configure conditionalbyCombinations('Linux', new_platform.platformCompilers, jobname, branchGroup)
-					//configure createPublishers(new_platform.publishers, jobname, new_platform.platformCompilers)		
+					configure conditionalbyCombinations('Linux', new_platform.platformCompilers, jobname, track.key)
+					configure createPublishers(new_platform.publishers, jobname, new_platform.platformCompilers)		
 				
 					}catch(Throwable e){}			
 			}	
