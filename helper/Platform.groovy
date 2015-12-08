@@ -109,12 +109,12 @@ class Platform {
 	def GenerateSCM(track) {	
 		this.RepoData.each { path ->
 			this.path = path.key			
-			def protocol = path.value.find { key, value -> key == 'protocol' }
-			
-			def address = protocol.value.find { key, value -> key == 'address' }
-			this.branch = path.value.find { key, value -> key == track }
+			def protocol = [:] << path.value.getAt { 'protocol' }
+			this.branch = [:] << path.value.getAt { 'branch' }
+			def address = [:] << protocol.getAt { 'address' }
+			def currbranch = path.value.find { key, value -> key == track }
 			boolean showbrowser = path.value.find { key, value -> key == 'showbrowser' }	
-			switch(protocol) {
+			switch(protocol.key) {
 				case 'svn':
 					return { project ->
 						project / scm(class: 'hudson.scm.SubversionSCM') {
@@ -145,7 +145,7 @@ class Platform {
 						relativeTargetDir '${WORKSPACE}'
 						branches {
 							'hudson.plugins.git.BranchSpec' {
-								name branch
+								name currbranch
 							}
 						}
 						if (showbrowser)	{
@@ -207,7 +207,7 @@ class Platform {
 						relativeTargetDir '${WORKSPACE}'
 						branches {
 							'hudson.plugins.git.BranchSpec' {
-								name branch
+								name currbranch
 							}
 						}					
 						extensions {
