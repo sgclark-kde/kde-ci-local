@@ -26,6 +26,7 @@ class Platform {
 	String platform_email
 	String platform_irc
 	static Map branch
+	String currbranch
 	String address
 	ArrayList tracks
 	String path
@@ -121,8 +122,8 @@ class Platform {
 		}
 		
 	}
-	def GenerateSCM(jobname, track) {
-		def currbranch = this.branch.getAt(track)		
+	def GenerateSCM(jobname, currbranch) {
+				
 			switch(this.protocol) {
 				case 'svn':
 					return { project ->
