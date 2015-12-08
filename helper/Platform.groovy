@@ -108,7 +108,7 @@ class Platform {
 	}
 	def GenerateSCM(repo, track) {	
 		repo.each { path ->			
-			def protocol = repo.find { key, value -> key == path.protcol }
+			def protocol = repo.find { key, value -> key == path.protocol }
 			
 			def address = protocol.find { key, value -> key == 'address' }
 			this.branch = path.branch."${protocol}".find { key, value -> key == track }
