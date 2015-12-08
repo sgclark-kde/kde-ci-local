@@ -58,7 +58,7 @@ class Platform {
 		this.RepoData = [:] << repositories
 		this.RepoData.each { path ->			
 			this.path = path.key
-			this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }.value()
+			this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
 			//this.branch = [:] << path.value.find { key, value -> key == 'branch' }
 			//this.address = [:] << path.value.find { key, value -> key == 'address' }			
 			//boolean showbrowser = path.value.find { key, value -> key == 'showbrowser' }
@@ -120,114 +120,115 @@ class Platform {
 	}
 	def GenerateSCM(jobname, track) {
 		def currbranch = this.branch.value.find { key, value -> key == track }
-		switch(this.protocol) {
-			case 'svn':
-				return { project ->
-					project / scm(class: 'hudson.scm.SubversionSCM') {
-						locations {
-							'hudson.scm.SubversionSCM_-ModuleLocation' {
-								remote this.address
-								local '.'
+		this.protocol.each { protocol ->
+			switch(protocol) {
+				case 'svn':
+					return { project ->
+						project / scm(class: 'hudson.scm.SubversionSCM') {
+							locations {
+								'hudson.scm.SubversionSCM_-ModuleLocation' {
+									remote this.address
+									local '.'
+								}
+							}
+							excludedRegions ''
+							includedRegions ''
+							excludedUsers ''
+							excludedRevprop ''
+							excludedCommitMessages ''
+							workspaceUpdater(class: "hudson.scm.subversion.UpdateUpdater")	
+						}				
+					}
+					break
+				case 'git':
+					return { project ->
+						project.name = 'matrix-project'
+						project / scm(class: 'hudson.plugins.git.GitSCM') {
+							userRemoteConfigs {
+								'hudson.plugins.git.UserRemoteConfig' {
+									url this.address
+								}
+							}
+							relativeTargetDir '${WORKSPACE}'
+							branches {
+								'hudson.plugins.git.BranchSpec' {
+									name currbranch
+								}
+							}
+							if (showbrowser)	{
+								browser(class: 'hudson.plugins.git.browser.GitWeb') {
+									url 'https://quickgit.kde.org/?p=' + jobname + '.git'
+								}
+							}
+							extensions {
+								'hudson.plugins.git.extensions.impl.CloneOption' {
+									shallow false
+									timeout '20'
+								}
 							}
 						}
-						excludedRegions ''
-						includedRegions ''
-						excludedUsers ''
-						excludedRevprop ''
-						excludedCommitMessages ''
-						workspaceUpdater(class: "hudson.scm.subversion.UpdateUpdater")	
-					}				
-				}
-				break
-			case 'git':
-				return { project ->
-				project.name = 'matrix-project'
-				project / scm(class: 'hudson.plugins.git.GitSCM') {
-					userRemoteConfigs {
-						'hudson.plugins.git.UserRemoteConfig' {
-							url this.address
-						}
 					}
-					relativeTargetDir '${WORKSPACE}'
-					branches {
-						'hudson.plugins.git.BranchSpec' {
-							name currbranch
-						}
-					}
-					if (showbrowser)	{
-						browser(class: 'hudson.plugins.git.browser.GitWeb') {
-							url 'https://quickgit.kde.org/?p=' + jobname + '.git'
-						}
-					}
-					extensions {
-						'hudson.plugins.git.extensions.impl.CloneOption' {
-							shallow false
-							timeout '20'
+					break
+				case 'lp':
+					return { project ->
+						project.name = 'matrix-project'
+						project / scm(class: 'hudson.plugins.bazaar.BazaarSCM') {
+							source this.address
+							cleantree false
+							checkout true
 							}
 						}
-					}
-				}
-				break
-			case 'lp':
-				return { project ->
-					project.name = 'matrix-project'
-					project / scm(class: 'hudson.plugins.bazaar.BazaarSCM') {
-						source this.address
-						cleantree false
-						checkout true
+					break
+				case 'hg': 
+					return { project ->
+						project.name = 'matrix-project'
+						project / scm(class: 'hudson.plugins.mercurial.MercurialSCM') {
+							source this.address
+							modules ''
+							revisionType BRANCH
+							revision 'default'
+							credentialsId ''
+							clean true
+							disableChangeLog false
 						}
 					}
-				break
-			case 'hg': 
-				 return { project ->
-					project.name = 'matrix-project'
-					project / scm(class: 'hudson.plugins.mercurial.MercurialSCM') {
-						source this.address
-						modules ''
-						revisionType BRANCH
-						revision 'default'
-						credentialsId ''
-						clean true
-						disableChangeLog false
-					}
-				}
-				break
-			case 'tar':
-				return { project ->
-					project.name = 'matrix-project'
-					buildStep(class: 'hudson.tasks.' + "${this.shell}") {
-						command "wget " + this.address + " \n" \
+					break
+				case 'tar':
+					return { project ->
+						project.name = 'matrix-project'
+						buildStep(class: 'hudson.tasks.' + "${this.shell}") {
+								"wget " + this.address + " \n" \
 								+ "tar --strip-components=1 -xf" + this.tarname + "\n" \
 								+ "rm " + this.tarname
-					}
-				}
-			default:			
-				return { project ->
-					project.name = 'matrix-project'
-					project / scm(class: 'hudson.plugins.git.GitSCM') {
-						userRemoteConfigs {
-							'hudson.plugins.git.UserRemoteConfig' {
-								url this.address
-							}
-						}
-						relativeTargetDir '${WORKSPACE}'
-						branches {
-							'hudson.plugins.git.BranchSpec' {
-								name currbranch
-							}
-						}					
-						extensions {
-							'hudson.plugins.git.extensions.impl.CloneOption' {
-								shallow false
-								timeout '20'
-							}
 						}
 					}
+				default:			
+					return { project ->
+						project.name = 'matrix-project'
+						project / scm(class: 'hudson.plugins.git.GitSCM') {
+							userRemoteConfigs {
+								'hudson.plugins.git.UserRemoteConfig' {
+									url this.address
+								}
+							}
+							relativeTargetDir '${WORKSPACE}'
+							branches {
+								'hudson.plugins.git.BranchSpec' {
+									name currbranch
+								}
+							}					
+							extensions {
+								'hudson.plugins.git.extensions.impl.CloneOption' {
+									shallow false
+									timeout '20'
+								}
+							}
+						}
+					}
+					break
 				}
-				break
-			}
-		}		
-	
+			}		
+		}
 	def BuildTriggers(repo, track, jobname) {
 		
 		def tokenid =  "PNcTKQORJW653QKVTwL0GV64OZA-${jobname}"
