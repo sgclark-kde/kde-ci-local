@@ -60,7 +60,7 @@ class Platform {
 		this.RepoData.each { path ->			
 			this.path = path.key			
 			this.RepoData = [:] << path.value
-			this.branch = [:] << RepoData.branch.value	
+			this.branch = [:] << RepoData.getAt("branch")
 			this.showbrowser = RepoData.showwebgit.value
 			this.RepoData.protocol.each { protocolinfo ->
 				this.address = protocolinfo.value.getAt("address")
