@@ -188,9 +188,17 @@ groupData.each { groups ->
 					/* Create the actual build steps */
 					//configure conditionalbyCombinations('Linux', new_platform.platformCompilers, jobname, track.key)
 					publisherdsl = new GeneratePublishers()
-					new_platform.platformCompilers.each { compiler ->
-						configure publisherdsl.FlexiblePublish(CIVars.publishers, compiler)		
+					println new_platform.platformCompilers
+					configure { project ->
+						project / publishers << 'org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher' {
+							publishers {
+								new_platform.platformCompilers.each { compiler ->									
+									publisherdsl.FlexiblePublish(CIVars.publishers, compiler)
+								}
+							}
+						}
 					}
+					
 					}catch(Throwable e){}			
 			}	
 			
