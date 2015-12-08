@@ -14,6 +14,7 @@ import org.jenkinsci.*
 
 class Platform {
 	static Map PlatformToCompiler = [:]
+	static Map RepoData = [:]
 	static List platformCompilers = []
 	static List platformsToBuild = []
 	String platform	
@@ -62,7 +63,8 @@ class Platform {
 	def newTrack()	{		
 		platformCompilers = []		
 		platformsToBuild = []	
-		PlatformToCompiler = [:]		
+		PlatformToCompiler = [:]
+		RepoData =[:]		
 	} 
 	def newCombinations(String platform, String compiler) {
 		this.combinations = [
@@ -104,7 +106,7 @@ class Platform {
 		}
 		
 	}
-	def GenerateSCM(repo, track) {		
+	def GenerateSCM(track) {		
 		Map repoinfo = this.repo.find { key, value -> key == protocol }
 		def protocol = repoinfo.key
 		def address = protocol.find { key, value -> key == address }

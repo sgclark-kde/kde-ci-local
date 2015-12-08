@@ -95,8 +95,8 @@ groupData.each { groups ->
 				//TO-DO Variations..
 				
 				//retrieve repository information and path
-				CIVars.repository = [:] << currentProject.getAt("repositories")
-				CIVars.getRepoInfo()
+				new_platform.RepoData = [:] << currentProject.getAt("repositories")
+				
 				def branch = CIVars.branches.getAt(track.value)				
 				assert branch != null : "The following platforms are scheduled to build for " + jobname + " " \
 				+ track.value + ": " + new_platform.platformsToBuild + " but no repository has been configured!!!"			
@@ -173,7 +173,7 @@ groupData.each { groups ->
 						configure variationClosure
 						// Generate buildsteps.
 						configure new_platform.initialPlatformBlock(new_platform.PlatformToCompiler)
-						configure new_platform.GenerateSCM(new_platform.repo, track.value)	
+						configure new_platform.GenerateSCM(new_platform.RepoData, track.value)	
 				
 						//analysisCollector()
 				

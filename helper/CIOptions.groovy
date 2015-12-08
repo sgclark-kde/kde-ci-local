@@ -48,13 +48,6 @@ class CIOptions {
 		this.publishers = publishers ?: true
 		this.view = view ?: "default"		
 	}		
-	def getRepoInfo() {	
-		this.repository.each { path -> 
-		this.path = path.key
-		this.repo_data = [:] << path.value
-		this.branches = [:] << this.repo_data.getAt("branch")
-		this.protocol = [:] << this.repo_data.getAt("protocol")
-		}		
-	}
+	
 
 }
