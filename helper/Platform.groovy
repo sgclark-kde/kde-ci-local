@@ -61,9 +61,9 @@ class Platform {
 			this.path = path.key			
 			this.RepoData = [:] << path.value
 			this.branch = RepoData.branch.value	
-			//this.showbrowser = RepoData.showbrowser.value
+			this.showbrowser = RepoData.showbrowser.value
 			this.RepoData.protocol.each { protocolinfo ->
-				this.address = protocolinfo.find("address").value
+				this.address = protocolinfo.address.value
 				this.protocol = protocolinfo.key
 			}
 		}	
