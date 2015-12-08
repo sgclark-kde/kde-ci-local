@@ -114,7 +114,7 @@ class Platform {
 			this.path = path.key			
 			def protocol = [:] << path.value.getAt("protocol")
 			this.branch = [:] << path.value.getAt("branch")
-			def address = [:] << protocol.value.getAt("address")
+			def address = [:] << path.value.getAt("address")
 			def currbranch = path.value.find { key, value -> key == track }
 			boolean showbrowser = path.value.find { key, value -> key == 'showbrowser' }	
 			switch(protocol.key) {
