@@ -58,15 +58,11 @@ class Platform {
 		this.VariationUbuntuP = VariationUbuntuP
 		this.RepoData = [:] << repositories
 		this.RepoData.each { path ->			
-			this.path = path.key
-			path.protocol.each { protocol ->
-				this.protocol = protocol.key
-				this.address = protocol.address.value
-			//this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
+			this.path = path.key			
+			this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
 			this.branch = [:] << path.value.find { key, value -> key == 'branch' }			
 			this.showbrowser = path.value.find { key, value -> key == 'showbrowser' }
-			}
-		}
+			}		
 		
 	}
 	def addPlatform(String key, String compiler, String track) {			
@@ -124,8 +120,9 @@ class Platform {
 	}
 	def GenerateSCM(jobname, track) {
 		def currbranch = this.branch.find { key, value -> key == track }
-		
-			switch(this.protocol) {
+		this.protocol.each { protocol ->
+			this.address = [:] << protocol.value.find { key, value -> key == 'address' }
+			switch(protocol.key) {
 				case 'svn':
 					return { project ->
 						project / scm(class: 'hudson.scm.SubversionSCM') {
@@ -232,7 +229,7 @@ class Platform {
 					break
 				}
 			}		
-		
+	}
 	def BuildTriggers(repo, track, jobname) {
 		
 		def tokenid =  "PNcTKQORJW653QKVTwL0GV64OZA-${jobname}"
