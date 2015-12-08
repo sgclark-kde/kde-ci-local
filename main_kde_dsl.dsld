@@ -103,7 +103,7 @@ groupData.each { groups ->
 				
 				/* BEGIN DSL CODE */
 				try{
-					matrixJob("${jobname} ${new_platform.branch} ${track.key} ${view}".replaceAll('/','-')) {
+					matrixJob("${jobname} ${new_platform.branch}.replaceAll('/','-') ${track.key} ${view}") {
 						configure { project ->
 							project / 'actions' {}
 							project << authToken("PNcTKQORJW653QKVTwL0GV64OZA-${jobname}")
@@ -173,7 +173,7 @@ groupData.each { groups ->
 						configure variationClosure
 						// Generate buildsteps.
 						configure new_platform.initialPlatformBlock(new_platform.PlatformToCompiler)
-						//configure SCMClosure	
+						configure SCMClosure	
 				
 						//analysisCollector()
 				
