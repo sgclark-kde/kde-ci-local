@@ -99,7 +99,7 @@ groupData.each { groups ->
 				println new_platform.branch
 				println new_platform.branch.key
 				println new_platform.branch.value
-				new_platform.currbranch = new_platform.branch.getAt(track.key)
+				new_platform.currbranch = new_platform.branch.find(track.value)
 				println "Repo branch " + new_platform.currbranch + " in track: " + track.key
 				def SCMClosure = new_platform.GenerateSCM(jobname, new_platform.currbranch)
 				
