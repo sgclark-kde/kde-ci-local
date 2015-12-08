@@ -108,9 +108,9 @@ class Platform {
 		
 	}
 	def GenerateSCM(repo, track) {		
-		Map repoinfo = repo.find { key, value -> key == protocol }
+		Map repoinfo = repo.find { key, value -> key == 'protocol' }
 		def protocol = repoinfo.key
-		def address = protocol.find { key, value -> key == address }
+		def address = protocol.find { key, value -> key == 'address' }
 		this.branch = repo.branch."${protocol}".find { key, value -> key == track }
 		boolean showbrowser = repo.showbrowser.value()		
 		switch(protocol) {
