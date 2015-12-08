@@ -114,7 +114,7 @@ class Platform {
 			this.path = path.key			
 			this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
 			this.branch = [:] << path.value.find { key, value -> key == 'branch' }
-			def address = [:] << protocol.value.find { key, value -> key == 'address' }
+			//def address = [:] << protocol.value.find { key, value -> key == 'address' }
 			def currbranch = branch.value.find { key, value -> key == track }
 			boolean showbrowser = path.value.find { key, value -> key == 'showbrowser' }	
 			switch(protocol.key) {
