@@ -63,7 +63,7 @@ class Platform {
 			this.branch = RepoData.branch.value	
 			//this.showbrowser = RepoData.showbrowser.value
 			this.RepoData.protocol.each { protocol ->
-				this.address = [:] << protocol.find { key, value -> key == 'address' }
+				this.address = protocol.address.value
 				this.protocol = protocol.key
 			}
 		}	
