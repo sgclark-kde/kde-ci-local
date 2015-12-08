@@ -30,6 +30,7 @@ class Platform {
 	ArrayList tracks
 	String path
 	String tarname
+	boolean showbrowser
 	Map combinations
 	ArrayList Variation
 	ArrayList VariationLinux
@@ -59,9 +60,9 @@ class Platform {
 		this.RepoData.each { path ->			
 			this.path = path.key
 			this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
-			//this.branch = [:] << path.value.find { key, value -> key == 'branch' }
-			//this.address = [:] << path.value.find { key, value -> key == 'address' }			
-			//boolean showbrowser = path.value.find { key, value -> key == 'showbrowser' }
+			this.branch = [:] << path.value.find { key, value -> key == 'branch' }
+			this.address = [:] << this.branch.value.find { key, value -> key == 'address' }			
+			this.showbrowser = path.value.find { key, value -> key == 'showbrowser' }
 		}
 		
 	}
@@ -119,7 +120,7 @@ class Platform {
 		
 	}
 	def GenerateSCM(jobname, track) {
-		def currbranch = this.branch.value.find { key, value -> key == track }
+		def currbranch = this.branch.find { key, value -> key == track }
 		this.protocol.each { protocol ->
 			switch(protocol) {
 				case 'svn':
