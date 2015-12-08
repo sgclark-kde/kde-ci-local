@@ -103,7 +103,7 @@ groupData.each { groups ->
 				
 				/* BEGIN DSL CODE */
 				try{
-					matrixJob("${jobname} ${new_platform.branch}.replaceAll('/','-') ${track.key} ${view}") {
+					matrixJob("${jobname} ${new_platform.branch} ${track.key} ${view}").replaceAll('/','-') {
 						configure { project ->
 							project / 'actions' {}
 							project << authToken("PNcTKQORJW653QKVTwL0GV64OZA-${jobname}")
