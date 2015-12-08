@@ -173,7 +173,7 @@ groupData.each { groups ->
 						configure variationClosure
 						// Generate buildsteps.
 						configure new_platform.initialPlatformBlock(new_platform.PlatformToCompiler)
-						configure new_platform.GenerateSCM(CIOptions.repo_data, track.value)	
+						configure new_platform.GenerateSCM(new_platform.repo, track.value)	
 				
 						//analysisCollector()
 				
