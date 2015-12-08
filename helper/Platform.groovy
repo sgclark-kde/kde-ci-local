@@ -59,15 +59,14 @@ class Platform {
 		this.RepoData = [:] << repositories
 		this.RepoData.each { path ->			
 			this.path = path.key			
-			this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
-			this.branch = [:] << path.value.find { key, value -> key == 'branch' }			
-			this.showbrowser = path.value.find { key, value -> key == 'showbrowser' }
-			}		
-//		this.protocol.each { protocol ->
-//			this.address = [:] << protocol.value.find { key, value -> key == 'address' }
-//			this.protocol = protocol.key
-//		}
-		
+			this.RepoData = [:] << path.value
+			this.branch = RepoData.branch.value	
+			this.showbrowser = RepoData.showbrowser.value
+			this.RepoData.protocol.each { protocol ->
+				this.address = [:] << protocol.find { key, value -> key == 'address' }
+				this.protocol = protocol.key
+			}
+		}	
 	}
 	def addPlatform(String key, String compiler, String track) {			
 		if(this.build != false && this.tracks.contains(track)) {			
