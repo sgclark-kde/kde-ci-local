@@ -63,10 +63,10 @@ class Platform {
 			this.branch = [:] << path.value.find { key, value -> key == 'branch' }			
 			this.showbrowser = path.value.find { key, value -> key == 'showbrowser' }
 			}		
-		this.protocol.each { protocol ->
-			this.address = [:] << protocol.value.find { key, value -> key == 'address' }
-			this.protocol = protocol.key
-		}
+//		this.protocol.each { protocol ->
+//			this.address = [:] << protocol.value.find { key, value -> key == 'address' }
+//			this.protocol = protocol.key
+//		}
 		
 	}
 	def addPlatform(String key, String compiler, String track) {			
