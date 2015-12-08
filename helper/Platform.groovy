@@ -56,14 +56,12 @@ class Platform {
 		this.VariationAndroid = VariationAndroid
 		this.VariationUbuntuP = VariationUbuntuP
 		this.RepoData = [:] << repositories
-		this.RepoData.each { path ->
-			println path.key
-			println path.value
+		this.RepoData.each { path ->			
 			this.path = path.key
-			this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
-			this.branch = [:] << path.value.find { key, value -> key == 'branch' }
-			this.address = [:] << path.value.find { key, value -> key == 'address' }			
-			boolean showbrowser = path.value.find { key, value -> key == 'showbrowser' }
+			//this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
+			//this.branch = [:] << path.value.find { key, value -> key == 'branch' }
+			//this.address = [:] << path.value.find { key, value -> key == 'address' }			
+			//boolean showbrowser = path.value.find { key, value -> key == 'showbrowser' }
 		}
 		
 	}
