@@ -60,8 +60,7 @@ class Platform {
 		this.RepoData.each { path ->			
 			this.path = path.key
 			this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
-			this.branch = [:] << path.value.find { key, value -> key == 'branch' }
-			this.address = [:] << this.branch.value.find { key, value -> key == 'address' }			
+			this.branch = [:] << path.value.find { key, value -> key == 'branch' }			
 			this.showbrowser = path.value.find { key, value -> key == 'showbrowser' }
 		}
 		
@@ -122,6 +121,7 @@ class Platform {
 	def GenerateSCM(jobname, track) {
 		def currbranch = this.branch.find { key, value -> key == track }
 		this.protocol.each { protocol ->
+			this.address = protocol.value.find { key, value -> key == 'address' }
 			switch(protocol) {
 				case 'svn':
 					return { project ->
