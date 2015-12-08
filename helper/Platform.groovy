@@ -26,7 +26,7 @@ class Platform {
 	String platform_irc
 	String branch
 	ArrayList tracks
-	ArrayList repo	
+	String path
 	Map combinations
 	ArrayList Variation
 	ArrayList VariationLinux
@@ -108,12 +108,12 @@ class Platform {
 		
 	}
 	def GenerateSCM(repo, track) {	
-		this.repo.each { path ->			
-			def protocol = path.value
-			println protocol
+		repo.each { path ->			
+			def protocol = repo.find { key, value -> key == path.protcol }
+			
 			def address = protocol.find { key, value -> key == 'address' }
-			this.branch = repo.branch."${protocol}".find { key, value -> key == track }
-			boolean showbrowser = repo.showbrowser.value()		
+			this.branch = path.branch."${protocol}".find { key, value -> key == track }
+			boolean showbrowser = path.showbrowser.value()		
 			switch(protocol) {
 				case 'svn':
 					return { project ->
