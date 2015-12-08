@@ -24,6 +24,7 @@ class Platform {
 	String compilers
 	String platform_email
 	String platform_irc
+	String branch
 	ArrayList tracks
 	ArrayList repo	
 	Map combinations
@@ -110,7 +111,7 @@ class Platform {
 		Map repoinfo = repo.find { key, value -> key == protocol }
 		def protocol = repoinfo.key
 		def address = protocol.find { key, value -> key == address }
-		def branch = repo.branch."${protocol}".find { key, value -> key == track }
+		this.branch = repo.branch."${protocol}".find { key, value -> key == track }
 		boolean showbrowser = repo.showbrowser.value()		
 		switch(protocol) {
 			case 'svn':

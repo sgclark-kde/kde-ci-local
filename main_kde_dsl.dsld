@@ -92,11 +92,12 @@ groupData.each { groups ->
 				def platformClosure = DSLClosure.generateDSLPlatformMatrix(new_platform.platformsToBuild)
 				def compilerClosure = DSLClosure.generateDSLCompilerMatrix(new_platform.platformCompilers)
 				def variationClosure = DSLClosure.generateDSLVariationsMatrix(new_platform.Variation)
+				
 				//TO-DO Variations..
 				
 				//retrieve repository information and path
 				new_platform.RepoData = [:] << currentProject.getAt("repositories")
-								
+				def SCMClosure = new_platform.GenerateSCM(new_platform.RepoData, track.value)
 				/* BEGIN DSL CODE */
 				try{
 					matrixJob("${jobname} ${branch} ${track.key} ${view}".replaceAll('/','-')) {
@@ -169,7 +170,7 @@ groupData.each { groups ->
 						configure variationClosure
 						// Generate buildsteps.
 						configure new_platform.initialPlatformBlock(new_platform.PlatformToCompiler)
-						configure new_platform.GenerateSCM(new_platform.RepoData, track.value)	
+						configure SCMClosure	
 				
 						//analysisCollector()
 				
