@@ -96,6 +96,7 @@ groupData.each { groups ->
 				
 				//retrieve repository information and path				
 				def SCMClosure = new_platform.GenerateSCM(currentProject, track.value)
+				println new_platform.protocol
 				/* BEGIN DSL CODE */
 				try{
 					matrixJob("${jobname} ${branch} ${track.key} ${view}".replaceAll('/','-')) {

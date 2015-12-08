@@ -15,6 +15,7 @@ import org.jenkinsci.*
 class Platform {
 	static Map PlatformToCompiler = [:]
 	static Map RepoData = [:]
+	static Map protocol = [:]
 	static List platformCompilers = []
 	static List platformsToBuild = []
 	String platform	
@@ -63,8 +64,7 @@ class Platform {
 	def newTrack()	{		
 		platformCompilers = []		
 		platformsToBuild = []	
-		PlatformToCompiler = [:]
-		RepoData =[:]
+		PlatformToCompiler = [:]		
 	} 
 	def newCombinations(String platform, String compiler) {
 		this.combinations = [
@@ -112,7 +112,7 @@ class Platform {
 			println path.key
 			println path.value			
 			this.path = path.key			
-			def protocol = [:] << path.value.getAt("protocol")
+			this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
 			this.branch = [:] << path.value.getAt("branch")
 			def address = [:] << path.value.getAt("address")
 			def currbranch = path.value.find { key, value -> key == track }
