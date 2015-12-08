@@ -179,7 +179,7 @@ groupData.each { groups ->
 						//analysisCollector()
 				
 						configure createEmailNotifications(jobname, new_platform.email)
-						configure createIRCNotifications(new_platform.irc)
+						//configure createIRCNotifications(new_platform.irc)
 				
 			
 					}
