@@ -121,7 +121,7 @@ class Platform {
 	def GenerateSCM(jobname, track) {
 		def currbranch = this.branch.find { key, value -> key == track }
 		this.protocol.each { protocol ->
-			this.address = protocol.value.find { key, value -> key == 'address' }
+			this.address = protocol.address.value
 			switch(protocol) {
 				case 'svn':
 					return { project ->
