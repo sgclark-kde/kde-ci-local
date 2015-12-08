@@ -12,6 +12,7 @@ import java.util.Map;
 import helper.CIOptions
 import helper.Platform
 import helper.GenerateMatrixDSL
+import helper.GenerateNotifications
 
 def allJsonMap = parse_kde_projects_json("${HOME}")
 assert allJsonMap instanceof Map
@@ -177,8 +178,8 @@ groupData.each { groups ->
 				
 						//analysisCollector()
 				
-						//configure createEmailNotifications(jobname, new_platform.email)
-						//configure createIRCNotifications(new_platform.irc)
+						configure createEmailNotifications(jobname, new_platform.email)
+						configure createIRCNotifications(new_platform.irc)
 				
 			
 					}
