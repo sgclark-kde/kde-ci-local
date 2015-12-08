@@ -47,8 +47,7 @@ class Platform {
 		this.build = build
 		this.compilers = compilers
 		this.platform_email	= platform_email
-		this.platform_irc = platform_irc
-		this.repositories = repositories
+		this.platform_irc = platform_irc		
 		this.tracks = tracks		
 		this.Variation = Variation
 		this.VariationLinux = VariationLinux
@@ -56,7 +55,7 @@ class Platform {
 		this.VariationOSX = VariationOSX
 		this.VariationAndroid = VariationAndroid
 		this.VariationUbuntuP = VariationUbuntuP
-		this.RepoData = [:] << this.repositories
+		this.RepoData = [:] << repositories
 		this.RepoData.each { path ->
 			println path.key
 			println path.value
