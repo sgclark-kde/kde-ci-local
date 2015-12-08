@@ -62,7 +62,7 @@ class Platform {
 			this.path = path.key
 			this.protocol = [:] << path.value.find { key, value -> key == 'protocol' }
 			this.branch = [:] << path.value.find { key, value -> key == 'branch' }
-			this.address = [:] << protocol.value.find { key, value -> key == 'address' }			
+			this.address = [:] << path.value.find { key, value -> key == 'address' }			
 			boolean showbrowser = path.value.find { key, value -> key == 'showbrowser' }
 		}
 		
