@@ -1149,7 +1149,7 @@
 						"kf5-qt5": "devel",											
 						"kf5-qt5-stable": "devel"						
 					},       		
-					"description":"Mirror of upstream opencv",					
+					"description":"Mirror of upstream molequeue",					
 					"platforms": {
     					"ubuntu": {
     						"build":"true",
@@ -1224,7 +1224,7 @@
 						"kf5-qt5": "devel",											
 						"kf5-qt5-stable": "devel"						
 					},       		
-					"description":"Mirror of upstream molequeue",					
+					"description":"Mirror of upstream opencv",					
 					"platforms": {
     					"ubuntu": {
     						"build":"true",
