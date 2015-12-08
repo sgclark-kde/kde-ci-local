@@ -106,8 +106,8 @@ class Platform {
 		}
 		
 	}
-	def GenerateSCM(repo, track) {	
-		repo.each { path ->			
+	def GenerateSCM(track) {	
+		this.RepoData.each { path ->			
 			def protocol = repo.find { key, value -> key == path.protocol }
 			
 			def address = protocol.find { key, value -> key == 'address' }

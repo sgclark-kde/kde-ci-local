@@ -82,8 +82,7 @@ groupData.each { groups ->
 			//Set CI variables
 			CIVars = new CIOptions(jobname, currentProject.description, currentProject.combinations, currentProject.downstream, currentProject.logrotator, \
 				currentProject.priority, currentProject.email, currentProject.irc, currentProject.html5, currentProject.cron, currentProject.publishers, currentProject.job_view)
-			view = CIVars.view
-			println view
+			view = CIVars.view			
 			//Set some DSL variables defined in the kde_projects.json			
 			def (daysToKeep, numToKeep, artifactDaysToKeep, artifactNumToKeep) = CIVars.logrotator.tokenize( ',' )
 			ArrayList Variation = new_platform.Variation ?: null
@@ -97,8 +96,8 @@ groupData.each { groups ->
 				
 				//retrieve repository information and path
 				new_platform.RepoData = [:] << currentProject.getAt("repositories")
-				println new_platform.RepoData
-				def SCMClosure = new_platform.GenerateSCM(new_platform.RepoData, track.value)
+				println new_platform.RepoData.key
+				def SCMClosure = new_platform.GenerateSCM(track.value)
 				/* BEGIN DSL CODE */
 				try{
 					matrixJob("${jobname} ${branch} ${track.key} ${view}".replaceAll('/','-')) {
