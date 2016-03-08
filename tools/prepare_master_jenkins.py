@@ -35,7 +35,7 @@ with open(home + '/manager_auth.txt') as f:
   credentials = [x.strip().split(':') for x in f.readlines()]
 
 for username,password in credentials:
-    jenkins_url = "https://build-sandbox.kde.org"
+    jenkins_url = "192.168.1.118:8081"
     username = username
     api_token = password
 
