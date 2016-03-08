@@ -58,7 +58,7 @@ for x in data_file:
   all_plugins = (x['plugins'])
   for plugin in all_plugins:
     data = '<jenkins><install plugin="' + plugin + '@latest" /></jenkins>'
-    url = 'http://192.168.1.118/pluginManager/installNecessaryPlugins'
+    url = 'http://192.168.1.118:8081/pluginManager/installNecessaryPlugins'
     req = urllib2.Request(url, data, {'Content-Type': 'text/xml'})
     f = urllib2.urlopen(req)
     for y in f:
