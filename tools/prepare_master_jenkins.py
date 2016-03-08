@@ -48,7 +48,7 @@ auth_handler.add_password(
 opener = urllib2.build_opener(auth_handler)
 urllib2.install_opener(opener)
      
-data_file = json.loads(open('master_plugins.json').read())   
+data_file = json.loads(open(home + 'tools/master_plugins.json').read())   
 
 for x in data_file:
   all_plugins = (x['plugins'])
