@@ -60,7 +60,6 @@ for x in data_file:
     data = '<jenkins><install plugin="' + plugin + '@latest" /></jenkins>'
     url = 'http://192.168.1.118:8081/pluginManager/installNecessaryPlugins'
     req = urllib2.Request(url, data, {'Content-Type': 'text/xml'})
-    f = urllib2.urlopen(req)
-    for y in f:
-      pprint("Now installing " + plugin)
+    with urllib2.urlopen(req)
+    f.
     f.close()
